@@ -1,6 +1,8 @@
 // FLOW — The Future Land of Wonder
 // Single source of truth for the sticker line-up.
-// Drop a real PNG at images/<slug>.png and it replaces the placeholder automatically.
+//
+// `img` is the exact source filename to upload into images/ (spaces and all).
+// If that file is missing, the card falls back to images/_placeholder/<slug>.svg.
 window.FLOW_PRODUCTS = [
   {
     slug: 'flow-pirates',
@@ -10,6 +12,7 @@ window.FLOW_PRODUCTS = [
     price: 4.99,
     accent: '#c9a227',
     tags: ['movies', 'classic'],
+    img: 'Logo FLORribbean.png',
   },
   {
     slug: 'flow-flowfather',
@@ -19,6 +22,7 @@ window.FLOW_PRODUCTS = [
     price: 4.99,
     accent: '#d4af37',
     tags: ['movies', 'classic'],
+    img: 'Logo Flowfather.png',
   },
   {
     slug: 'flow-jurassic',
@@ -28,6 +32,7 @@ window.FLOW_PRODUCTS = [
     price: 4.99,
     accent: '#d32f2f',
     tags: ['movies'],
+    img: 'Logo Jurassic.jpg',
   },
   {
     slug: 'flow-wars',
@@ -37,6 +42,7 @@ window.FLOW_PRODUCTS = [
     price: 4.99,
     accent: '#f4c20d',
     tags: ['movies'],
+    img: 'Logo Star Wars.png',
   },
   {
     slug: 'flow-fresh',
@@ -46,6 +52,7 @@ window.FLOW_PRODUCTS = [
     price: 3.99,
     accent: '#ff5db1',
     tags: ['street'],
+    img: 'Logo Grafiti.jpg',
   },
   {
     slug: 'flow-zelda',
@@ -55,6 +62,7 @@ window.FLOW_PRODUCTS = [
     price: 4.99,
     accent: '#2e7d32',
     tags: ['games'],
+    img: 'Logo Zelda.jpg',
   },
   {
     slug: 'flow-tv',
@@ -64,6 +72,7 @@ window.FLOW_PRODUCTS = [
     price: 3.99,
     accent: '#23e08a',
     tags: ['street'],
+    img: 'Logo FLOW TV.jpg',
   },
   {
     slug: 'flow-street',
@@ -73,6 +82,7 @@ window.FLOW_PRODUCTS = [
     price: 3.99,
     accent: '#f4b400',
     tags: ['street'],
+    img: 'Logo Street.jpg',
   },
   {
     slug: 'flow-grey',
@@ -82,5 +92,16 @@ window.FLOW_PRODUCTS = [
     price: 4.99,
     accent: '#9b6dff',
     tags: ['movies', 'street'],
+    img: 'Logo Wizard.jpg',
+  },
+  {
+    slug: 'flow-future',
+    title: 'Back to the FLOWture',
+    blurb: '88 mph straight into the Future Land of Wonder. Where we’re going, we don’t need roads.',
+    parody: 'Back to the Future',
+    price: 4.99,
+    accent: '#4ea3ff',
+    tags: ['movies'],
+    img: 'Logo Back to the FLOWture.png',
   },
 ];

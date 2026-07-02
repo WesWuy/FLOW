@@ -18,8 +18,9 @@ python3 -m http.server 8000
 ## Adding the real artwork
 
 The site ships with auto-generated placeholders so it looks complete out of the
-box. To use the real designs, drop PNGs into `images/` with the filenames listed
-in [`images/README.md`](images/README.md) — they swap in automatically.
+box. To use the real designs, upload the artwork into `images/` using the exact
+filenames listed in [`images/README.md`](images/README.md) (drag them in as-is —
+no renaming, mixed `.jpg`/`.png` is fine). They swap in automatically.
 
 ## The line-up
 
@@ -34,6 +35,7 @@ in [`images/README.md`](images/README.md) — they swap in automatically.
 | FLOW TV | Street / retro |
 | FLOW Street | Street / graffiti |
 | FLOW the Grey | The Lord of the Rings |
+| Back to the FLOWture | Back to the Future |
 
 ## Project structure
 

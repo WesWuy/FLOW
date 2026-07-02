@@ -4,9 +4,10 @@
   const grid = document.getElementById('grid');
   const money = (n) => '$' + n.toFixed(2);
 
-  // Image source: real PNG, falling back to generated placeholder if missing.
+  // Image source: the uploaded artwork (exact filename), falling back to the
+  // generated placeholder if that file isn't in images/ yet.
   const imgFor = (p) =>
-    `images/${p.slug}.png`;
+    'images/' + encodeURIComponent(p.img || `${p.slug}.png`);
   const placeholderFor = (p) =>
     `images/_placeholder/${p.slug}.svg`;
 
@@ -140,7 +141,7 @@
   function addPack(kind) {
     if (kind === 'all') {
       products.forEach((p) => addToCart(p.slug, 1));
-      toast('Full Vault added — all 9 designs');
+      toast(`Full Vault added — all ${products.length} designs`);
     } else {
       const n = parseInt(kind, 10);
       products.slice(0, n).forEach((p) => addToCart(p.slug, 1));
