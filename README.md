@@ -1,64 +1,43 @@
-# FLOW — Rave Cave Merch Site
+# FLOW — The Future Land of Wonder
 
-A single-page sticker storefront for **FLOW · The Future Land of Wonder**.
+The official FLOW home for original art, collectible merch, and imaginative
+experiences created by artist and founder Anthony Daigneault.
 
-Nine die-cut sticker drops, each a parody of a different universe, with a
-filterable line-up, pack deals, and a working client-side cart.
+## Current live site
 
-## Run it
-
-It's plain HTML/CSS/JS — no build step. Just open `index.html`, or serve the
-folder:
-
-```bash
-python3 -m http.server 8000
-# then visit http://localhost:8000
-```
-
-## Current live-site package
-
-The imported `deploy/` directory contains **The Rave in The Cave** site and its
-packaged FLOW design-system runtime. It is ready for static hosting as-is:
+Netlify publishes the self-contained `deploy/` directory. It includes the FLOW
+brand home, merchandise collection, cart demo, design tokens, and product
+artwork.
 
 ```bash
 python3 -m http.server 8000 --directory deploy
 # then visit http://localhost:8000
 ```
 
-The root-level storefront files are the earlier prototype and remain available
-for reference.
+The root-level storefront files are an earlier prototype retained for reference.
 
-## Adding the real artwork
+## Content policy
 
-The site ships with auto-generated placeholders so it looks complete out of the
-box. To use the real designs, upload the artwork into `images/` using the exact
-filenames listed in [`images/README.md`](images/README.md) (drag them in as-is —
-no renaming, mixed `.jpg`/`.png` is fine). They swap in automatically.
+FLOW events appear as entries within the broader brand site. Unconfirmed dates,
+venues, lineups, ticket information, and other event details are not published.
 
-## The line-up
+## Merchandise
 
-| Design | Parody |
-|--------|--------|
-| Pirates of the FLOW-ribbean | Pirates of the Caribbean |
-| The FLOWfather | The Godfather |
-| FLOW Park | Jurassic Park |
-| FLOW Wars | Star Wars |
-| FLOW Fresh | Street / graffiti |
-| Legend of FLOW | The Legend of Zelda |
-| FLOW TV | Street / retro |
-| FLOW Street | Street / graffiti |
-| FLOW the Grey | The Lord of the Rings |
-| Back to the FLOWture | Back to the Future |
+The current collection offers each design as stickers, T-shirts, and prints.
+Product content and image mappings live in `deploy/products.js`; artwork lives
+in `deploy/images/products/`.
 
 ## Project structure
 
-```
-deploy/         current live site + packaged design-system runtime
-index.html      markup + sections
-styles.css      rave/neon styling
-products.js     the line-up (edit titles, prices, blurbs here)
-app.js          grid render, filters, cart
-images/         your PNGs go here (placeholders included)
+```text
+deploy/                         current Netlify site
+deploy/index.html              document shell and accessibility styles
+deploy/flow-site.jsx           FLOW brand, merch, and events interface
+deploy/products.js             product catalog and image mappings
+deploy/images/products/        production artwork
+deploy/tokens/                 design-system tokens
+deploy/_ds_bundle.js           packaged shared UI components
+netlify.toml                   Netlify publish-directory configuration
 ```
 
 Stickers are parody fan art.

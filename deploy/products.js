@@ -1,4 +1,4 @@
-// FLOW — merch line-up for The Rave in The Cave (mirrors source repo products.js).
+// FLOW — merch collection for The Future Land of Wonder.
 // Each design now ships in three formats: sticker (original), t-shirt, print.
 // All listed designs use user-provided artwork.
 (function () {
@@ -7,7 +7,7 @@
     { slug: "flow-flowfather", title: "The FLOWfather", blurb: "Gold-foil mob royalty. An offer you can't outflow.", parody: "The Godfather", price: 4.99, accent: "#d4af37", tags: ["movies", "classic"], img: "images/products/flow-flowfather.png" },
     { slug: "flow-jurassic", title: "FLOW Park", blurb: "Apex-predator red. The future land where the dinos roam.", parody: "Jurassic Park", price: 4.99, accent: "#d32f2f", tags: ["movies"], img: "images/products/flow-jurassic.jpg" },
     { slug: "flow-wars", title: "FLOW Wars", blurb: "A galaxy far, far in the flow. May the flow be with you.", parody: "Star Wars", price: 4.99, accent: "#f4c20d", tags: ["movies"], img: "images/products/flow-wars.png" },
-    { slug: "flow-fresh", title: "FLOW Fresh", blurb: "The real deal — crown-topped bubble graffiti dripping in sunset gradients. Also the wordmark on the door at The Cave.", parody: "Street / graffiti", price: 3.99, accent: "#ff5db1", tags: ["street"], img: "images/products/flow-fresh.jpg" },
+    { slug: "flow-fresh", title: "FLOW Fresh", blurb: "The real deal — crown-topped bubble graffiti dripping in sunset gradients.", parody: "Street / graffiti", price: 3.99, accent: "#ff5db1", tags: ["street"], img: "images/products/flow-fresh.jpg" },
     { slug: "flow-zelda", title: "Legend of FLOW", blurb: "Triforce crest on the Hylian shield. It's dangerous to go without flow.", parody: "The Legend of Zelda", price: 4.99, accent: "#2e7d32", tags: ["games"], img: "images/products/flow-zelda.jpg" },
     { slug: "flow-tv", title: "FLOW TV", blurb: "Neon green-pink drip with a glitchy retro set. Static never looked so clean.", parody: "Street / retro", price: 3.99, accent: "#23e08a", tags: ["street"], img: "images/products/flow-tv.jpg" },
     { slug: "flow-street", title: "FLOW Street", blurb: "Wildstyle throw-up sprayed straight onto the concrete.", parody: "Street / graffiti", price: 3.99, accent: "#f4b400", tags: ["street"], img: "images/products/flow-street.jpg" },

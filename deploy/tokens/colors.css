@@ -1,5 +1,5 @@
 /* FLOW — The Future Land of Wonder
-   Color tokens, lifted 1:1 from the Rave Cave Merch Site (styles.css :root).
+   Color tokens for the FLOW storefront (styles.css :root).
    Base values first, semantic aliases after. */
 
 :root {
@@ -20,7 +20,7 @@
      Not in the source repo. The brand brief calls for "God's sacred
      geometry Earth" — these are additional harmonious tones (same hue
      family as --hot/--cool via oklch) for a calmer, ceremonial register
-     (sunrise sets, dawn circles) alongside the rave-neon core. Use
+     (sunrise sets, dawn circles) alongside the retro-neon core. Use
      sparingly, and flag if the brand supplies real values later. */
   --dawn-violet: oklch(55% 0.18 305);
   --dawn-amber: oklch(75% 0.15 70);

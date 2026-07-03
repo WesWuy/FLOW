@@ -1,9 +1,10 @@
-<!-- Deploy copy of the show site (Netlify Drop). Source of truth: ui_kits/flow-show/ -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>The Rave in The Cave — FLOW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="FLOW — The Future Land of Wonder. Explore original art, collectible merch, and imaginative experiences.">
+<title>FLOW — The Future Land of Wonder</title>
 <link rel="stylesheet" href="styles.css">
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
@@ -17,6 +18,9 @@
     .flow-mandala-spin { animation: flow-spin 140s linear infinite; }
     .flow-mandala-spin-slow { animation: flow-spin-slow 180s linear infinite; }
   }
+  :focus-visible { outline: 3px solid #36e2ff; outline-offset: 4px; }
+  .flow-skip-link { position: fixed; top: -100px; left: 16px; z-index: 100; padding: 10px 16px; border-radius: 999px; background: #36e2ff; color: #07060d; font-weight: 700; }
+  .flow-skip-link:focus { top: 16px; }
 </style>
 </head>
 <body style="margin:0;">
@@ -24,9 +28,9 @@
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#07060d"></rect><text x="50" y="58" text-anchor="middle" font-family="Impact, sans-serif" font-size="26" fill="#ff2d95">FLOW</text></svg>
 </template>
 <div id="root"></div>
-<script type="text/babel" src="show-site.jsx"></script>
+<script type="text/babel" src="flow-site.jsx"></script>
 <script type="text/babel">
-ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(window.ShowSite));
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(window.FlowSite));
 </script>
 </body>
 </html>
