@@ -1,0 +1,43 @@
+/* FLOW — The Future Land of Wonder
+   Color tokens, lifted 1:1 from the Rave Cave Merch Site (styles.css :root).
+   Base values first, semantic aliases after. */
+
+:root {
+  /* ---- Base palette (verbatim from repo) ---- */
+  --bg: #07060d;           /* void black-purple, the base canvas */
+  --panel: #0f0d1a;        /* card / section surface */
+  --panel-2: #15121f;      /* raised surface (header, drawer) */
+  --ink: #f3f0ff;          /* primary text, near-white violet */
+  --muted: #a59fc0;        /* secondary text, lavender-grey */
+  --line: #241f37;         /* hairline borders */
+
+  --hot: #ff2d95;          /* neon magenta — primary accent */
+  --cool: #36e2ff;         /* neon cyan — secondary accent */
+  --lime: #b6ff3d;         /* neon lime — money / success / price */
+  --gold: #f4c20d;         /* neon gold — premium / featured */
+
+  /* ---- Sacred-geometry extension palette ----
+     Not in the source repo. The brand brief calls for "God's sacred
+     geometry Earth" — these are additional harmonious tones (same hue
+     family as --hot/--cool via oklch) for a calmer, ceremonial register
+     (sunrise sets, dawn circles) alongside the rave-neon core. Use
+     sparingly, and flag if the brand supplies real values later. */
+  --dawn-violet: oklch(55% 0.18 305);
+  --dawn-amber: oklch(75% 0.15 70);
+  --dawn-rose: oklch(70% 0.16 15);
+
+  /* ---- Semantic aliases ---- */
+  --surface-canvas: var(--bg);
+  --surface-card: var(--panel);
+  --surface-raised: var(--panel-2);
+  --text-primary: var(--ink);
+  --text-secondary: var(--muted);
+  --border-hairline: var(--line);
+
+  --accent-primary: var(--hot);
+  --accent-secondary: var(--cool);
+  --accent-success: var(--lime);
+  --accent-premium: var(--gold);
+
+  --focus-ring: var(--cool);
+}

@@ -15,6 +15,19 @@ python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
+## Current live-site package
+
+The imported `deploy/` directory contains **The Rave in The Cave** site and its
+packaged FLOW design-system runtime. It is ready for static hosting as-is:
+
+```bash
+python3 -m http.server 8000 --directory deploy
+# then visit http://localhost:8000
+```
+
+The root-level storefront files are the earlier prototype and remain available
+for reference.
+
 ## Adding the real artwork
 
 The site ships with auto-generated placeholders so it looks complete out of the
@@ -40,6 +53,7 @@ no renaming, mixed `.jpg`/`.png` is fine). They swap in automatically.
 ## Project structure
 
 ```
+deploy/         current live site + packaged design-system runtime
 index.html      markup + sections
 styles.css      rave/neon styling
 products.js     the line-up (edit titles, prices, blurbs here)
