@@ -1,0 +1,17 @@
+/* FLOW — base resets, shared across the design system */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--surface-canvas);
+  line-height: var(--leading-body);
+}
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+}
+a { color: inherit; text-decoration: none; }

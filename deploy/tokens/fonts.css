@@ -1,0 +1,9 @@
+/* FLOW — Webfonts
+   The source repo loads these live from Google Fonts (no binaries were
+   committed to the codebase, so there is nothing to self-host). This
+   @import pulls the same families/weights the site uses. If you need
+   fully offline/self-hosted fonts, download woff2 files for Bebas Neue
+   + Space Grotesk from Google Fonts and replace this @import with
+   @font-face rules pointing at local files. */
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap");
