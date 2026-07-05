@@ -16,6 +16,7 @@
     { slug: "flow-mrflowhead", title: "Mr FLOW Head", blurb: "Disco-fried spud royalty in platform shoes. Point it anywhere — the funk follows.", parody: "Mr. Potato Head", price: 4.99, accent: "#f4a220", tags: ["movies", "classic"], img: "images/products/flow-mrflowhead.jpg" },
     { slug: "flow-need4flow", title: "Need for FLOW 2 Underground", blurb: "Neon-drenched street racers at 2AM. The underground never sleeps.", parody: "Need for Speed", price: 4.99, accent: "#e14bd2", tags: ["games", "street"], img: "images/products/flow-need4flow.png" },
     { slug: "flow-megaflow", title: "Mega FLOW", blurb: "Blue bomber energy, buster fully charged. Boss level: the future.", parody: "Mega Man", price: 4.99, accent: "#2f7ff4", tags: ["games"], img: "images/products/flow-megaflow.png" },
+    { slug: "flow-arcade", title: "FLOW Arcade", blurb: "Neon maze energy, pixel ghosts, and a high-score chase through the Future Land of Wonder.", parody: "Classic arcade", price: 4.99, accent: "#e8f20a", tags: ["games", "classic"], img: "images/products/flow-arcade.jpg" },
   ];
 
   const FORMATS = {
@@ -42,5 +43,29 @@
     });
   });
 
-  window.FLOW_MERCH_PRODUCTS = { PRODUCTS, DESIGNS, FORMATS };
+  const PACKS = [
+    {
+      slug: "starter-3-pack",
+      title: "Starter 3-Pack",
+      price: 11.99,
+      img: DESIGNS[0].img,
+      orderPrompt: "Choose any 3 sticker designs in the PayPal note.",
+    },
+    {
+      slug: "full-vault",
+      title: "The Full Vault",
+      price: 29.99,
+      img: DESIGNS[1].img,
+      orderPrompt: "Includes one sticker in every FLOW design.",
+    },
+    {
+      slug: "holo-duo",
+      title: "Holo Duo",
+      price: 12.99,
+      img: DESIGNS[2].img,
+      orderPrompt: "Choose any 2 sticker designs in the PayPal note.",
+    },
+  ];
+
+  window.FLOW_MERCH_PRODUCTS = { PRODUCTS, DESIGNS, FORMATS, PACKS };
 })();

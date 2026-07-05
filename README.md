@@ -6,7 +6,7 @@ experiences created by artist and founder Anthony Daigneault.
 ## Current live site
 
 Netlify publishes the self-contained `deploy/` directory. It includes the FLOW
-brand home, merchandise collection, cart demo, design tokens, and product
+brand home, merchandise collection, PayPal checkout, design tokens, and product
 artwork.
 
 ```bash
@@ -26,6 +26,10 @@ venues, lineups, ticket information, and other event details are not published.
 The current collection offers each design as stickers, T-shirts, and prints.
 Product content and image mappings live in `deploy/products.js`; artwork lives
 in `deploy/images/products/`.
+
+Cart checkout opens Anthony's PayPal.Me profile with the USD total prefilled.
+The site copies the itemized order summary so the buyer can paste it into the
+PayPal payment note. Sticker packs use their displayed bundle prices.
 
 ## Project structure
 

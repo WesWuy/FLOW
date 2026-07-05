@@ -271,7 +271,9 @@ function CartDrawer({
   onClose,
   onQtyChange,
   onRemove,
-  onCheckout
+  onCheckout,
+  checkoutLabel = "Checkout",
+  checkoutNote = "Review your total before continuing."
 }) {
   if (!open) return null;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
@@ -416,14 +418,14 @@ function CartDrawer({
       color: "#fff",
       boxShadow: "var(--glow-primary)"
     }
-  }, "Checkout"), /*#__PURE__*/React.createElement("p", {
+  }, checkoutLabel), /*#__PURE__*/React.createElement("p", {
     style: {
       textAlign: "center",
       color: "var(--text-secondary)",
       fontSize: "11px",
       margin: "10px 0 0"
     }
-  }, "Demo storefront \u2014 checkout is a placeholder."))));
+  }, checkoutNote))));
 }
 Object.assign(__ds_scope, { CartDrawer });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/commerce/CartDrawer.jsx", error: String((e && e.message) || e) }); }

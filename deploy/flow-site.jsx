@@ -2,7 +2,11 @@
 // Uses the compiled FLOW design-system components loaded by index.html.
 (function () {
   const { Header, Chip, Button, ProductCard, PackCard, CartDrawer, Toast } = window.FLOWDesignSystem_3bfa55;
-  const { PRODUCTS } = window.FLOW_MERCH_PRODUCTS;
+  const { PRODUCTS, PACKS } = window.FLOW_MERCH_PRODUCTS;
+  const ALL_PURCHASABLE_ITEMS = PRODUCTS.concat(PACKS);
+  const PAYPAL_ME_URL = "https://paypal.me/Antonius369";
+
+  const paypalCheckoutUrl = (total) => `${PAYPAL_ME_URL}/${total.toFixed(2)}USD`;
 
   function FlowSite() {
     const [kind, setKind] = React.useState("sticker");
@@ -22,8 +26,8 @@
     const removeItem = (slug) => setQty(slug, 0);
 
     const cartItems = Object.entries(cart).map(([slug, qty]) => {
-      const product = PRODUCTS.find((p) => p.slug === slug);
-      return product ? { slug, qty, title: product.title, price: product.price, img: product.img } : null;
+      const product = ALL_PURCHASABLE_ITEMS.find((p) => p.slug === slug);
+      return product ? { slug, qty, title: product.title, price: product.price, img: product.img, orderPrompt: product.orderPrompt } : null;
     }).filter(Boolean);
     const cartCount = cartItems.reduce((total, item) => total + item.qty, 0);
     const cartTotal = cartItems.reduce((total, item) => total + item.qty * item.price, 0);
@@ -31,15 +35,39 @@
     const byKind = PRODUCTS.filter((product) => product.kind === kind);
     const visible = filter === "all" ? byKind : byKind.filter((product) => product.tags.includes(filter));
 
-    const addPack = (amount) => {
-      if (amount === "all") {
-        byKind.forEach((product) => addToCart(product.slug, 1));
-        showToast(`Full Vault added — all ${byKind.length} designs`);
-      } else {
-        byKind.slice(0, amount).forEach((product) => addToCart(product.slug, 1));
-        showToast(`${amount} designs added to cart`);
-      }
+    const addPack = (slug) => {
+      const pack = PACKS.find((item) => item.slug === slug);
+      if (!pack) return;
+      addToCart(pack.slug, 1);
+      showToast(`${pack.title} added to cart`);
       setCartOpen(true);
+    };
+
+    const checkoutWithPayPal = () => {
+      if (!cartCount) {
+        showToast("Cart is empty");
+        return;
+      }
+
+      const orderSummary = [
+        "FLOW order",
+        ...cartItems.map((item) => `${item.qty} x ${item.title} - $${(item.qty * item.price).toFixed(2)}${item.orderPrompt ? `\n  ${item.orderPrompt}` : ""}`),
+        `Total: $${cartTotal.toFixed(2)} USD`,
+      ].join("\n");
+      const checkoutUrl = paypalCheckoutUrl(cartTotal);
+      const orderCopy = navigator.clipboard && window.isSecureContext
+        ? navigator.clipboard.writeText(orderSummary)
+        : null;
+
+      window.open(checkoutUrl, "_blank", "noopener,noreferrer");
+
+      if (orderCopy) {
+        orderCopy
+          .then(() => showToast("PayPal opened — paste the copied order details into the note"))
+          .catch(() => showToast("PayPal opened — add your order details to the payment note"));
+      } else {
+        showToast("PayPal opened — add your order details to the payment note");
+      }
     };
 
     return React.createElement("div", { id: "top", style: { position: "relative", minHeight: "100vh", background: "var(--surface-canvas)", overflowX: "hidden" } },
@@ -123,7 +151,8 @@
             React.createElement("div", null,
               React.createElement("p", { style: { color: "var(--accent-primary)", letterSpacing: "3px", textTransform: "uppercase", fontSize: "11px", margin: "0 0 8px" } }, "The collection"),
               React.createElement("h2", { style: { fontSize: "40px", margin: 0 } }, "Shop the FLOW"),
-              React.createElement("p", { style: { color: "var(--text-secondary)", margin: "8px 0 0" } }, "Stickers, tees, and prints from across the Future Land of Wonder.")
+              React.createElement("p", { style: { color: "var(--text-secondary)", margin: "8px 0 0" } }, "Stickers, tees, and prints from across the Future Land of Wonder."),
+              React.createElement("p", { style: { color: "var(--text-secondary)", margin: "6px 0 0", fontSize: "13px" } }, "Prices are in USD. Checkout is handled securely through PayPal.")
             ),
             React.createElement("div", { style: { display: "flex", gap: "8px", flexWrap: "wrap" } },
               ["sticker", "tshirt", "print"].map((format) => React.createElement(Chip, { key: format, active: kind === format, onClick: () => setKind(format) }, format === "sticker" ? "Stickers" : format === "tshirt" ? "T-Shirts" : "Prints"))
@@ -137,11 +166,11 @@
           )
         ),
 
-        React.createElement("section", { id: "packs", "data-screen-label": "FLOW Site — Packs", style: { maxWidth: "var(--container-max)", margin: "10px auto 30px", padding: "20px clamp(16px,4vw,48px)" } },
+        kind === "sticker" && React.createElement("section", { id: "packs", "data-screen-label": "FLOW Site — Packs", style: { maxWidth: "var(--container-max)", margin: "10px auto 30px", padding: "20px clamp(16px,4vw,48px)" } },
           React.createElement("div", { style: { display: "grid", gap: "18px", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" } },
-            React.createElement(PackCard, { title: "Starter 3-Pack", price: "$11.99", note: "Any three single drops. Mix universes.", ctaLabel: "Add 3-Pack", onAdd: () => addPack(3) }),
-            React.createElement(PackCard, { title: "The Full Vault", price: "$29.99", note: "The complete FLOW design collection.", badge: "Best value", featured: true, ctaLabel: "Add the Vault", onAdd: () => addPack("all") }),
-            React.createElement(PackCard, { title: "Holo Duo", price: "$12.99", note: "Any two designs on rainbow holographic vinyl.", ctaLabel: "Add Holo Duo", onAdd: () => addPack(2) })
+            React.createElement(PackCard, { title: "Starter 3-Pack", price: "$11.99", note: "Any three single drops. Add your choices to the PayPal note.", ctaLabel: "Add 3-Pack", onAdd: () => addPack("starter-3-pack") }),
+            React.createElement(PackCard, { title: "The Full Vault", price: "$29.99", note: "One sticker in every FLOW design.", badge: "Best value", featured: true, ctaLabel: "Add the Vault", onAdd: () => addPack("full-vault") }),
+            React.createElement(PackCard, { title: "Holo Duo", price: "$12.99", note: "Any two designs on rainbow holographic vinyl. Add your choices to the PayPal note.", ctaLabel: "Add Holo Duo", onAdd: () => addPack("holo-duo") })
           )
         ),
 
@@ -181,7 +210,9 @@
       React.createElement(CartDrawer, {
         open: cartOpen, items: cartItems, total: cartTotal,
         onClose: () => setCartOpen(false), onQtyChange: setQty, onRemove: removeItem,
-        onCheckout: () => { if (!cartCount) { showToast("Cart is empty"); return; } showToast("Demo only — thanks for surfing the FLOW!"); },
+        checkoutLabel: "Pay with PayPal",
+        checkoutNote: "Pay Antonius369 in USD. Your total is prefilled; paste the copied order details into the PayPal note.",
+        onCheckout: checkoutWithPayPal,
       }),
       React.createElement(Toast, { message: toast.message, show: toast.show, onHide: () => setToast((current) => ({ ...current, show: false })) })
     );
