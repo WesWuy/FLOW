@@ -98,7 +98,7 @@
         maskImage: "radial-gradient(circle, #000 45%, transparent 72%)", WebkitMaskImage: "radial-gradient(circle, #000 45%, transparent 72%)",
       } }),
 
-      React.createElement(Header, { cartCount, onCartClick: () => setCartOpen(true), links: ["About", "Merch", "Events"], logoSrc: "assets/brand/flow-wordmark.jpg" }),
+      React.createElement(Header, { cartCount, onCartClick: () => setCartOpen(true), links: ["About", "Merch", "Events", "Contact"], logoSrc: "assets/brand/flow-wordmark.jpg" }),
 
       React.createElement("main", { id: "main-content" },
         React.createElement("section", { "data-screen-label": "FLOW Site — Hero", style: { position: "relative", padding: "clamp(64px,10vw,126px) clamp(16px,4vw,48px) 64px", maxWidth: 1100, margin: "0 auto", textAlign: "center", overflow: "hidden" } },
@@ -174,7 +174,7 @@
           )
         ),
 
-        React.createElement("section", { id: "events", "data-screen-label": "FLOW Site — Events", style: { position: "relative", maxWidth: "var(--container-narrow)", margin: "0 auto", padding: "30px clamp(16px,4vw,48px) 80px" } },
+        React.createElement("section", { id: "events", "data-screen-label": "FLOW Site — Events", style: { position: "relative", maxWidth: "var(--container-narrow)", margin: "0 auto", padding: "30px clamp(16px,4vw,48px) 70px" } },
           React.createElement("img", { "aria-hidden": true, src: "assets/geometry/metatron-cube.svg", className: "flow-mandala-spin-slow", style: {
             position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "min(520px, 120%)", height: "min(520px, 120%)", opacity: 0.08, zIndex: 0, pointerEvents: "none",
           } }),
@@ -195,6 +195,53 @@
               "Planning is underway. Date, venue, lineup, and ticket information are not yet public."
             )
           )
+        ),
+
+        React.createElement("section", { id: "contact", "data-screen-label": "FLOW Site — Contact", className: "flow-contact-section" },
+          React.createElement("div", { "aria-hidden": true, className: "flow-contact-orbit" }),
+          React.createElement("div", { className: "flow-contact-grid" },
+            React.createElement("div", { className: "flow-contact-copy" },
+              React.createElement("p", { className: "flow-contact-kicker" }, "Open a portal"),
+              React.createElement("h2", null, "Send a signal into the FLOW"),
+              React.createElement("p", null, "Questions about art, merch, collaborations, or future experiences? Drop us a line and the right human will write back."),
+              React.createElement("a", { href: "mailto:contact@futurelandofwonder.com", className: "flow-contact-email" }, "contact@futurelandofwonder.com")
+            ),
+            React.createElement("form", {
+              name: "contact",
+              method: "POST",
+              action: "/thanks.html",
+              "data-netlify": "true",
+              "netlify-honeypot": "bot-field",
+              className: "flow-contact-form",
+            },
+              React.createElement("input", { type: "hidden", name: "form-name", value: "contact" }),
+              React.createElement("input", { type: "hidden", name: "subject", value: "New FLOW inquiry (%{submissionId})", "data-remove-prefix": true }),
+              React.createElement("p", { className: "flow-honeypot" },
+                React.createElement("label", null, "Do not fill this out: ", React.createElement("input", { name: "bot-field", tabIndex: "-1", autoComplete: "off" }))
+              ),
+              React.createElement("div", { className: "flow-contact-fields" },
+                React.createElement("label", { className: "flow-field" },
+                  React.createElement("span", null, "Your name"),
+                  React.createElement("input", { type: "text", name: "name", autoComplete: "name", required: true })
+                ),
+                React.createElement("label", { className: "flow-field" },
+                  React.createElement("span", null, "Email address"),
+                  React.createElement("input", { type: "email", name: "email", autoComplete: "email", required: true })
+                )
+              ),
+              React.createElement("label", { className: "flow-field" },
+                React.createElement("span", null, "What are you reaching out about?"),
+                React.createElement("select", { name: "topic", defaultValue: "General inquiry" },
+                  ["General inquiry", "Order help", "Art & collaborations", "Events"].map((topic) => React.createElement("option", { key: topic, value: topic }, topic))
+                )
+              ),
+              React.createElement("label", { className: "flow-field" },
+                React.createElement("span", null, "Message"),
+                React.createElement("textarea", { name: "message", rows: "6", required: true })
+              ),
+              React.createElement("button", { type: "submit", className: "flow-contact-submit" }, "Send message")
+            )
+          )
         )
       ),
 
@@ -202,7 +249,7 @@
         React.createElement("img", { src: "assets/brand/flow-wordmark.jpg", alt: "FLOW — The Future Land of Wonder", style: { height: "34px", width: "auto" } }),
         React.createElement("p", { style: { margin: "6px 0", fontSize: "13px" } }, "The Future Land of Wonder · Art · Merch · Experiences"),
         React.createElement("p", { style: { margin: "6px 0", fontSize: "12px" } },
-          "Founded by Anthony Daigneault · ", React.createElement("a", { href: "https://www.artpal.com/handecapp", target: "_blank", rel: "noopener", style: { color: "var(--accent-secondary)" } }, "Art on ArtPal")
+          "Founded by Anthony Daigneault · ", React.createElement("a", { href: "https://www.artpal.com/handecapp", target: "_blank", rel: "noopener", style: { color: "var(--accent-secondary)" } }, "Art on ArtPal"), " · ", React.createElement("a", { href: "mailto:contact@futurelandofwonder.com", style: { color: "var(--accent-secondary)" } }, "Contact")
         ),
         React.createElement("p", { style: { margin: "6px 0", fontSize: "11px", opacity: 0.7 } }, `© ${new Date().getFullYear()} FLOW. Stickers are parody fan art.`)
       ),
