@@ -16,7 +16,8 @@ import json
 from fractions import Fraction as F
 
 # ---------------------------------------------------------------- field dims
-WALL_W, WALL_H = F(224), F(106)                       # 18'-8" x 8'-10"
+WALL_W = F(224) + F(1, 2)                             # 18'-8 1/2", field-measured
+WALL_H = F(106) + F(3, 8)                             # 8'-10 3/8", field-measured
 
 DISP_W, DISP_H = F(75), F(42) + F(3, 4)               # Samsung QM85C
 DISP_BTM = F(52)                                      # matches the front wall
@@ -31,7 +32,8 @@ CAM_BTM = DISP_TOP + CAM_GAP
 CAM_TOP = CAM_BTM + CAM_H
 CAM_CL = CAM_BTM + CAM_H / 2
 
-AFF_CLUSTER = F(65) + F(11, 16)
+AFF_CLUSTER = F(65) + F(11, 16)                       # A and B
+DATA_AFF = F(65) + F(15, 16)                          # C sits 1/4" proud of A/B
 LV_X, SW_X, DATA_X = F(118) + F(29, 32), F(126) + F(9, 32), F(132) + F(25, 32)
 P4_X, P4_AFF = F(47) + F(19, 32), F(48) + F(7, 32)
 TS_X, TS_AFF = F(48) + F(13, 16), F(62) + F(15, 32)
@@ -164,7 +166,7 @@ def device(key, cx, aff):
 
 TAG = P(22)
 for key, kx, aff, letter in (("lv", LV_X, AFF_CLUSTER, "A"), ("sw", SW_X, AFF_CLUSTER, "B"),
-                             ("data", DATA_X, AFF_CLUSTER, "C")):
+                             ("data", DATA_X, DATA_AFF, "C")):
     y, h = device(key, kx, aff)
     seg(X(kx), y + h, X(kx), y + h + P(16), "#9a9a9a", 0.8, "dashed")
     box(X(kx) - TAG / 2, y + h + P(16), TAG, TAG, width=1.4, fill="#ffffff", text=letter, sh="circle")
@@ -205,7 +207,7 @@ vdim(0, DOOR_H, X(WALL_W) + P(60), frac(DOOR_H), X(DOOR_X + DOOR_W), side="right
 # ----------------------------------------------------------- device schedule
 rows = [("A", "LV CABLE BOX", ftin(LV_X), ftin(AFF_CLUSTER)),
         ("B", "LIGHT SWITCH", ftin(SW_X), ftin(AFF_CLUSTER)),
-        ("C", "DUAL-PORT DATA OUTLET", ftin(DATA_X), ftin(AFF_CLUSTER) + "  *"),
+        ("C", "DUAL-PORT DATA OUTLET", ftin(DATA_X), ftin(DATA_AFF)),
         ("D", "4x LIGHT SWITCH PANEL", ftin(P4_X), ftin(P4_AFF)),
         ("E", "THERMOSTAT", ftin(TS_X), ftin(TS_AFF))]
 cells = [{"xPosition": c, "yPosition": 0, "text": h,
@@ -221,15 +223,15 @@ shapes.append({"id": sid("tbl"), "type": "table",
 
 notes = "\n".join([
     "NOTES",
-    '1.  DISPLAY CENTERED ON WALL - 74 1/2" CLEAR EACH SIDE. BTM 52" AFF MATCHES THE FRONT-OF-ROOM DUAL DISPLAY WALL.',
+    '1.  DISPLAY CENTERED ON WALL - 74 3/4" CLEAR EACH SIDE. BTM 52" AFF MATCHES THE FRONT-OF-ROOM DUAL DISPLAY WALL.',
     '2.  AVER CAM570 CENTERED ON DISPLAY, 1" ABOVE DISPLAY TOP: BTM 95 3/4" AFF, LENS CL APPROX. 99 1/2" AFF -',
     "     VERIFY LENS OFFSET ON THE FACTORY WALL MOUNT BRACKET.",
-    '3.  CAMERA LEAVES 2 3/4" TO CEILING; 3 3/4" IS THE MAXIMUM POSSIBLE AT BTM 52" AFF. CEILING IS FLAT AT 8\'-10".',
+    '3.  CAMERA LEAVES 3 1/8" TO CEILING; 4 1/8" IS THE MAXIMUM POSSIBLE AT BTM 52" AFF. CEILING IS FLAT AT 8\'-10 3/8".',
     "4.  DEVICES A, B AND C FALL BEHIND THE DISPLAY. LV BOX (A) IS INTENDED; RELOCATE LIGHT SWITCH (B) CLEAR OF DISPLAY.",
-    '5.  * AFF OF DATA OUTLET (C) NOT PROVIDED - SHOWN AT 5\'-5 11/16" TO MATCH ADJACENT DEVICES. VERIFY IN FIELD.',
-    '6.  DOOR LEAF WIDTH ASSUMED 36"; 14\'-1 15/16" DIMENSION TAKEN TO LEFT JAMB.',
-    "7.  DEVICE DIMENSIONS ARE TO PLATE CENTERLINE. NO FURNITURE ON THIS WALL.",
-    "8.  ALL DIMENSIONS IN INCHES UNLESS NOTED."])
+    '5.  DOOR DIMENSION 14\'-1 15/16" IS TO THE OUTSIDE OF THE CASING. LEAF WIDTH ASSUMED 36".',
+    "6.  DEVICE DIMENSIONS ARE TO PLATE CENTERLINE. NO FURNITURE ON THIS WALL.",
+    "7.  WALL AND DEVICE DIMENSIONS FIELD-MEASURED. DIMENSIONS IN INCHES UNLESS NOTED."])
+
 shapes.append({"id": sid("t"), "type": "text",
                "boundingBox": {"x": round(X0 - P(122) + P(760), 1), "y": round(BAND, 1),
                                "w": round(P(680), 1), "h": 260},
