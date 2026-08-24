@@ -60,24 +60,33 @@ Only one dimension on the sheet is not field-measured:
   52" AFF, since 52 + 42 3/4 display + 7 1/2 camera consumes the 106 3/8" wall.
   More clearance than that requires lowering the display.
 
-## Front wall (Rev. 2)
+## Front wall (Rev. 3)
 
-Redrawn from Rev. 1 onto the rear wall's sheet. Nothing on this wall is
-field-measured yet.
+Redrawn from Rev. 1 onto the rear wall's sheet, then updated with field
+measurements.
 
 | | |
 |---|---|
-| Wall | 206" x 106" (from Rev. 1) |
+| Wall | 206" x 106 1/2", field-measured |
 | Displays | (2) 98" Samsung — 85 7/8" W x 48 7/8" H, BTM 52" AFF, 17" clear each side |
 | Mounts | XTM1U + FCAXV1U — 42 3/4" x 24 1/2", centered on each display |
 | Camera | AVer CAM570 — lens CL 46" AFF, centered below the displays |
-| Credenza | 33 1/4" H |
+| Credenza | 33 1/4" to top of stone, full wall width |
+| Devices | A-D keyed to schedule; Rev. 1's 80 1/2" / 4" / 48" / 39 3/4" chain plus a 33 3/4" remainder closes on 206" |
 
 Rev. 1 gives 17" each side and 206" overall, which leaves 1/4" unaccounted for
 across the pair. It is drawn as a gap between the displays so both 17" callouts
 stay exact; the alternative is 17 1/8" margins with the displays touching.
 
-Open items are carried as notes on the sheet: the four Rev. 1 device dimensions
-(80 1/2", 4", 48", 39 3/4") are not yet tied to identified devices, the credenza
-width and setback need confirming, and the wall height needs reconciling against
-the rear wall's measured 8'-10 3/8".
+Device AFF is derived, not measured from the floor: the credenza blocks a
+floor-hooked tape against this wall face, so the field tape reads 31 5/8" above
+the 33 1/4" counter, giving 64 7/8" AFF. It is starred on the sheet.
+
+All four devices land behind the displays, and A and C are 20 A duplex
+receptacles — that needs a decision before rough-in, same as the rear wall's
+light switch.
+
+Remaining open items, carried as notes: device B and D types, the credenza base
+and counter projection, whether the 1/4" across the display pair is a gap or
+17 1/8" margins, the CAM570 lens offset, and the 1/8" difference between this
+wall's 106 1/2" and the rear wall's 106 3/8".
