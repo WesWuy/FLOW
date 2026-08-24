@@ -194,9 +194,12 @@ label(X(WALL_W / 2), BOT1 + P(30), "EXISTING DEVICE CENTERLINES FROM LEFT WALL",
 hdim(0, WALL_W, BOT2, frac(WALL_W))
 
 vdim(0, WALL_H, X0 - P(122), frac(WALL_H), X(0))
-vdim(0, DISP_BTM, X0 - P(64), frac(DISP_BTM), dx)
-vdim(DISP_BTM, DISP_TOP, X0 - P(64), frac(DISP_H), dx)
-vdim(DISP_TOP, WALL_H, X0 - P(64), frac(WALL_H - DISP_TOP), dx)
+# display heights dimension against the display itself, not the sheet margin,
+# so the floor-to-BTM dimension reads unambiguously
+DIMX = dx - P(46)
+vdim(0, DISP_BTM, DIMX, frac(DISP_BTM) + " AFF", dx)
+vdim(DISP_BTM, DISP_TOP, DIMX, frac(DISP_H), dx)
+vdim(DISP_TOP, WALL_H, DIMX, frac(WALL_H - DISP_TOP), dx)
 vdim(0, DOOR_H, X(WALL_W) + P(60), frac(DOOR_H), X(DOOR_X + DOOR_W), side="right")
 
 # ----------------------------------------------------------- device schedule
