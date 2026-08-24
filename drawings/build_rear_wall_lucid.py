@@ -26,7 +26,7 @@ DISP_TOP = DISP_BTM + DISP_H
 MOUNT_W, MOUNT_H = F(34) + F(3, 4), F(17)             # Chief Fusion LTM1U
 
 CAM_W, CAM_H = F(6) + F(3, 4), F(7) + F(1, 2)         # AVer CAM570
-CAM_GAP = F(2)                                        # clear above display top
+CAM_GAP = F(1)                                        # clear above display top
 CAM_BTM = DISP_TOP + CAM_GAP
 CAM_TOP = CAM_BTM + CAM_H
 CAM_CL = CAM_BTM + CAM_H / 2
@@ -152,7 +152,7 @@ label(mx + L(MOUNT_W) / 2, my + P(48), '34 3/4" x 17"', 340, 44)
 cx0 = X(WALL_W / 2 - CAM_W / 2)
 box(cx0, Y(CAM_TOP), L(CAM_W), L(CAM_H), width=1.8, fill="#ffffff")
 label(cx0 + L(CAM_W) + P(94), Y(CAM_CL),
-      'AVer CAM570 4K DUAL LENS\nBTM 96 3/4" AFF', 270, 62)
+      'AVer CAM570 4K DUAL LENS\nBTM 95 3/4" AFF', 270, 62)
 seg(cx0 + L(CAM_W), Y(CAM_CL), cx0 + L(CAM_W) + P(14), Y(CAM_CL), "#6a6a6a", 0.9)
 
 # ------------------------------------------------------------------- devices
@@ -222,13 +222,14 @@ shapes.append({"id": sid("tbl"), "type": "table",
 notes = "\n".join([
     "NOTES",
     '1.  DISPLAY CENTERED ON WALL - 74 1/2" CLEAR EACH SIDE. BTM 52" AFF MATCHES THE FRONT-OF-ROOM DUAL DISPLAY WALL.',
-    '2.  AVER CAM570 CENTERED ON DISPLAY, 2" ABOVE DISPLAY TOP: BTM 96 3/4" AFF, LENS CL APPROX. 100 1/2" AFF -',
+    '2.  AVER CAM570 CENTERED ON DISPLAY, 1" ABOVE DISPLAY TOP: BTM 95 3/4" AFF, LENS CL APPROX. 99 1/2" AFF -',
     "     VERIFY LENS OFFSET ON THE FACTORY WALL MOUNT BRACKET.",
-    '3.  CAMERA LEAVES 1 3/4" TO CEILING. DROP DISPLAY TO 48" BTM AFF FOR 5 3/4" CLEARANCE IF REQUIRED.',
+    '3.  CAMERA LEAVES 2 3/4" TO CEILING; 3 3/4" IS THE MAXIMUM POSSIBLE AT BTM 52" AFF. CEILING IS FLAT AT 8\'-10".',
     "4.  DEVICES A, B AND C FALL BEHIND THE DISPLAY. LV BOX (A) IS INTENDED; RELOCATE LIGHT SWITCH (B) CLEAR OF DISPLAY.",
     '5.  * AFF OF DATA OUTLET (C) NOT PROVIDED - SHOWN AT 5\'-5 11/16" TO MATCH ADJACENT DEVICES. VERIFY IN FIELD.',
     '6.  DOOR LEAF WIDTH ASSUMED 36"; 14\'-1 15/16" DIMENSION TAKEN TO LEFT JAMB.',
-    "7.  ALL DIMENSIONS IN INCHES UNLESS NOTED. VERIFY ALL DIMENSIONS IN FIELD."])
+    "7.  DEVICE DIMENSIONS ARE TO PLATE CENTERLINE. NO FURNITURE ON THIS WALL.",
+    "8.  ALL DIMENSIONS IN INCHES UNLESS NOTED."])
 shapes.append({"id": sid("t"), "type": "text",
                "boundingBox": {"x": round(X0 - P(122) + P(760), 1), "y": round(BAND, 1),
                                "w": round(P(680), 1), "h": 260},
