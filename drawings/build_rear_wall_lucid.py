@@ -28,16 +28,21 @@ MOUNT_W, MOUNT_H = F(34) + F(3, 4), F(17)             # Chief Fusion LTM1U
 
 CAM_W, CAM_H = F(6) + F(3, 4), F(7) + F(1, 2)         # AVer CAM570
 CAM_GAP = F(1)                                        # clear above display top
-CAM_BTM = DISP_TOP + CAM_GAP
+CAM_BTM = DISP_TOP + CAM_GAP                          # the number that gets mounted to
 CAM_TOP = CAM_BTM + CAM_H
-CAM_CL = CAM_BTM + CAM_H / 2
 
 AFF_CLUSTER = F(65) + F(11, 16)                       # A and B
 DATA_AFF = F(65) + F(15, 16)                          # C sits 1/4" proud of A/B
 LV_X, SW_X, DATA_X = F(118) + F(29, 32), F(126) + F(9, 32), F(132) + F(25, 32)
 P4_X, P4_AFF = F(47) + F(19, 32), F(48) + F(7, 32)
-TS_X, TS_AFF = F(48) + F(13, 16), F(62) + F(15, 32)
-DOOR_X, DOOR_H, DOOR_W = F(169) + F(15, 16), F(94) + F(1, 2), F(36)
+TS_X, TS_AFF = F(49) + F(15, 16), F(62) + F(15, 32)   # CL; 4'-0 13/16" was the left edge
+
+# DOOR_X and DOOR_H are field-measured to the OUTSIDE of the casing. Casing face
+# is assumed, so it shifts only the leaf inside the assembly - every dimension
+# that matters to the AV scope is taken to the casing and stays exact.
+DOOR_X, DOOR_H, DOOR_LEAF = F(169) + F(15, 16), F(94) + F(1, 2), F(36)
+CASING = F(2)
+DOOR_W = DOOR_LEAF + 2 * CASING
 
 SZ = {"lv": (F(9, 2), F(9, 2)), "sw": (F(11, 4), F(9, 2)), "data": (F(9, 2), F(9, 2)),
       "p4": (F(8) + F(3, 16), F(9, 2)), "ts": (F(9, 2), F(13, 4))}
@@ -134,10 +139,12 @@ box(X(0), Y(WALL_H), L(WALL_W), L(WALL_H), width=2.2, fill="#ffffff")
 label(X(0) + P(90), FLOOR - P(26), "REAR WALL", 260, 52)
 
 box(X(DOOR_X), Y(DOOR_H), L(DOOR_W), L(DOOR_H), width=1.8, fill="#f4f2ee")
-box(X(DOOR_X) + P(6), Y(DOOR_H) + P(6), L(DOOR_W) - P(12), L(DOOR_H) - P(6), "#9a9a9a", 0.9)
-box(X(DOOR_X) + L(DOOR_W) - P(30), Y(36) - P(6), P(12), P(12), "#1a1a1a", 1.4, sh="circle")
+box(X(DOOR_X + CASING), Y(DOOR_H - CASING), L(DOOR_LEAF), L(DOOR_H - CASING),
+    "#9a9a9a", 0.9)
+box(X(DOOR_X + CASING + DOOR_LEAF) - P(24), Y(36) - P(6), P(12), P(12),
+    "#1a1a1a", 1.4, sh="circle")
 label(X(DOOR_X + DOOR_W / 2), Y(DOOR_H) + P(30), "DOOR", 250, 52)
-label(X(DOOR_X + DOOR_W / 2), Y(DOOR_H) + P(62), '7\'-10 1/2" HIGH', 310, 45)
+label(X(DOOR_X + DOOR_W / 2), Y(DOOR_H) + P(62), '36" LEAF  |  7\'-10 1/2" HIGH', 330, 45)
 
 # ------------------------------------------------------------------- display
 dx, dy, dw, dh = X(DISP_L), Y(DISP_TOP), L(DISP_W), L(DISP_H)
@@ -153,9 +160,10 @@ label(mx + L(MOUNT_W) / 2, my + P(48), '34 3/4" x 17"', 340, 44)
 # -------------------------------------------------------------------- camera
 cx0 = X(WALL_W / 2 - CAM_W / 2)
 box(cx0, Y(CAM_TOP), L(CAM_W), L(CAM_H), width=1.8, fill="#ffffff")
-label(cx0 + L(CAM_W) + P(94), Y(CAM_CL),
-      'AVer CAM570 4K DUAL LENS\nBTM 95 3/4" AFF', 270, 62)
-seg(cx0 + L(CAM_W), Y(CAM_CL), cx0 + L(CAM_W) + P(14), Y(CAM_CL), "#6a6a6a", 0.9)
+cam_mid = (Y(CAM_TOP) + Y(CAM_BTM)) / 2
+label(cx0 + L(CAM_W) + P(94), cam_mid,
+      'AVer CAM570 4K DUAL LENS\nON FACTORY BRACKET  |  BTM 95 3/4" AFF', 270, 62)
+seg(cx0 + L(CAM_W), cam_mid, cx0 + L(CAM_W) + P(14), cam_mid, "#6a6a6a", 0.9)
 
 # ------------------------------------------------------------------- devices
 def device(key, cx, aff):
@@ -224,11 +232,10 @@ shapes.append({"id": sid("tbl"), "type": "table",
 notes = "\n".join([
     "NOTES",
     '1.  DISPLAY CENTERED ON WALL - 74 3/4" CLEAR EACH SIDE. BTM 52" AFF MATCHES THE FRONT-OF-ROOM DUAL DISPLAY WALL.',
-    '2.  AVER CAM570 CENTERED ON DISPLAY, 1" ABOVE DISPLAY TOP: BTM 95 3/4" AFF, LENS CL APPROX. 99 1/2" AFF -',
-    "     VERIFY LENS OFFSET ON THE FACTORY WALL MOUNT BRACKET.",
+    '2.  AVER CAM570 ON FACTORY WALL MOUNT BRACKET, CENTERED ON DISPLAY, 1" ABOVE DISPLAY TOP: BTM 95 3/4" AFF.',
     '3.  CAMERA LEAVES 3 1/8" TO CEILING; 4 1/8" IS THE MAXIMUM POSSIBLE AT BTM 52" AFF. CEILING IS FLAT AT 8\'-10 3/8".',
     "4.  DEVICES A, B AND C FALL BEHIND THE DISPLAY. LV BOX (A) IS INTENDED; RELOCATE LIGHT SWITCH (B) CLEAR OF DISPLAY.",
-    '5.  DOOR DIMENSION 14\'-1 15/16" IS TO THE OUTSIDE OF THE CASING. LEAF WIDTH ASSUMED 36".',
+    '5.  DOOR: 36" LEAF, 7\'-10 1/2" HIGH. 14\'-1 15/16" IS TO THE OUTSIDE OF THE CASING; CASING FACE ASSUMED 2".',
     "6.  DEVICE DIMENSIONS ARE TO PLATE CENTERLINE. NO FURNITURE ON THIS WALL.",
     "7.  WALL AND DEVICE DIMENSIONS FIELD-MEASURED. DIMENSIONS IN INCHES UNLESS NOTED."])
 
@@ -245,10 +252,10 @@ label(TBC, P(272), "ALLSHORES\nExecutive Meeting Room\nRear Wall\nSingle Display
 box(TBC - P(66), P(540), P(132), P(132), "#d8d8d8", 1.2, sh="circle", text="PSI.")
 label(TBC, P(700), "PRECISE SYSTEMS INTEGRATION", 450, 38)
 seg(TB_X + P(30), P(790), SHEET_W - P(56), P(790), "#d0d0d0", 1)
-label(TBC, P(880), 'SCALE: NTS\nWALL: 18\'-8" W x 8\'-10" H\nDISPLAY: (1) SAMSUNG QM85C 85"\n'
+label(TBC, P(880), 'SCALE: NTS\nWALL: 18\'-8 1/2" W x 8\'-10 3/8" H\nDISPLAY: (1) SAMSUNG QM85C 85"\n'
                    "MOUNT: CHIEF FUSION LTM1U\nCAMERA: AVER CAM570 ABOVE DISPLAY", 470, 200)
 seg(TB_X + P(30), P(960), SHEET_W - P(56), P(960), "#d0d0d0", 1)
-label(TBC, P(1035), "DATE CREATED: 26/08/24\nCREATED BY: WW\nRev. 2", 470, 120)
+label(TBC, P(1035), "DATE CREATED: 26/08/24\nCREATED BY: WW\nRev. 3 - FIELD MEASURED", 470, 120)
 
 doc = {"version": 1, "pages": [{"id": "page1", "title": "Rear Wall Elevation",
                                 "shapes": shapes, "lines": lines}]}
@@ -262,7 +269,6 @@ assert CAM_TOP <= WALL_H, CAM_TOP
 bottom = max(s["boundingBox"]["y"] + s["boundingBox"]["h"] for s in shapes[2:])
 print(f"wrote {out} | {len(shapes)} shapes, {len(lines)} lines")
 print(f"display {frac(DISP_L)} .. {frac(DISP_L+DISP_W)}  top {frac(DISP_TOP)} AFF")
-print(f"camera  BTM {frac(CAM_BTM)} AFF  top {frac(CAM_TOP)}  CL {frac(CAM_CL)}  "
-      f"head {frac(WALL_H-CAM_TOP)}")
+print(f"camera  BTM {frac(CAM_BTM)} AFF  top {frac(CAM_TOP)}  head {frac(WALL_H-CAM_TOP)}")
 print(f"disp R -> door jamb {frac(DOOR_X-DISP_L-DISP_W)} | chain closes on {frac(chain)}")
 print(f"content bottom {bottom:.0f} vs sheet inner {P(26)+SHEET_H-P(52):.0f}")

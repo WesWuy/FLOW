@@ -17,8 +17,8 @@ Regenerate with:
 | Wall | 18'-8 1/2" W x 8'-10 3/8" H (224 1/2" x 106 3/8"), field-measured |
 | Display | Samsung QM85C / LH85QMCEBGCXGO — 75" W x 42 3/4" H, BTM 52" AFF, centered (74 3/4" clear each side) |
 | Mount | Chief Fusion LTM1U — 34 3/4" W x 17" H |
-| Camera | AVer CAM570 4K dual lens — 6 3/4" W x 7 1/2" H, centered above the display, BTM 96 3/4" AFF |
-| Door | 7'-10 1/2" H, outside of casing 14'-1 15/16" from the left wall; leaf width assumed 36" |
+| Camera | AVer CAM570 4K dual lens — 6 3/4" W x 7 1/2" H, on its factory bracket, centered above the display with a 1" gap, BTM 95 3/4" AFF |
+| Door | 36" leaf, 7'-10 1/2" H; outside of casing 14'-1 15/16" from the left wall |
 
 Manufacturer dimensions: QM85C 1904.3 x 1085.3 mm; CAM570 170.8 x 190.5 mm.
 
@@ -30,15 +30,24 @@ Manufacturer dimensions: QM85C 1904.3 x 1085.3 mm; CAM570 170.8 x 190.5 mm.
 | B | Light switch | 10'-6 9/32" | 5'-5 11/16" |
 | C | Dual-port data outlet | 11'-0 25/32" | 5'-5 15/16" |
 | D | 4x light switch panel | 3'-11 19/32" | 4'-0 7/32" |
-| E | Thermostat | 4'-0 13/16" | 5'-2 15/32" |
+| E | Thermostat | 4'-1 15/16" | 5'-2 15/32" |
 
-## Assumptions carried on the sheet
+Every value above is laser-measured. The thermostat was measured twice, 1 1/8"
+apart; 4'-1 15/16" is the centerline and 4'-0 13/16" was the plate's left edge.
 
-* Door leaf width assumed 36"; the 14'-1 15/16" dimension is field-confirmed to
-  the outside of the casing.
+## What is still assumed
+
+Only one dimension on the sheet is not field-measured:
+
+* **Casing face, assumed 2".** It positions the leaf inside the door assembly and
+  nothing else. Every dimension in the AV scope — including display-edge-to-casing
+  at 20 3/16" — is taken to the outside of the casing, which *is* measured, so the
+  assumption cannot move any AV dimension.
+
+## Conditions to resolve before rough-in
+
 * Devices A, B and C land behind the display. The LV box is intended; the light
-  switch needs relocating before rough-in.
-* The camera leaves 3 1/8" to the ceiling at BTM 52" AFF with a 1" gap; 4 1/8" is
-  the physical maximum at that mounting height.
-* Thermostat (E) horizontal is unresolved: 4'-0 13/16" and 4'-1 15/16" were both
-  measured, exactly 1 1/8" apart.
+  switch needs relocating.
+* The camera leaves 3 1/8" to the ceiling. 4 1/8" is the physical maximum at BTM
+  52" AFF, since 52 + 42 3/4 display + 7 1/2 camera consumes the 106 3/8" wall.
+  More clearance than that requires lowering the display.
