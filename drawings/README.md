@@ -1,14 +1,22 @@
-# ALLSHORES Executive Meeting Room — Rear Wall Single Display Elevation
+# ALLSHORES Executive Meeting Room — Elevations
 
-`build_rear_wall_lucid.py` is the source of truth for the elevation. It holds every
-field dimension as an exact `Fraction` of an inch and emits
-`allshores-rear-wall-single-display.lucid.json` in Lucid's Standard Import format,
-which is imported with assisted layout **off** so each element keeps its scaled
-position on the sheet.
+Two walls share one sheet format:
 
-Regenerate with:
+| Wall | Generator | Output |
+|---|---|---|
+| Rear (single display) | `build_rear_wall_lucid.py` | `allshores-rear-wall-single-display.lucid.json` |
+| Front (dual display) | `build_front_wall_lucid.py` | `allshores-front-wall-dual-display.lucid.json` |
+
+`elevation_sheet.py` holds the shared drawing primitives and sheet furniture.
+
+## Rear wall
+
+Each generator holds its field dimensions as exact `Fraction`s of an inch and emits
+Lucid Standard Import JSON, imported with assisted layout **off** so every element
+keeps its scaled position on the sheet.
 
     python3 drawings/build_rear_wall_lucid.py
+    python3 drawings/build_front_wall_lucid.py
 
 ## Wall
 
@@ -51,3 +59,25 @@ Only one dimension on the sheet is not field-measured:
 * The camera leaves 3 1/8" to the ceiling. 4 1/8" is the physical maximum at BTM
   52" AFF, since 52 + 42 3/4 display + 7 1/2 camera consumes the 106 3/8" wall.
   More clearance than that requires lowering the display.
+
+## Front wall (Rev. 2)
+
+Redrawn from Rev. 1 onto the rear wall's sheet. Nothing on this wall is
+field-measured yet.
+
+| | |
+|---|---|
+| Wall | 206" x 106" (from Rev. 1) |
+| Displays | (2) 98" Samsung — 85 7/8" W x 48 7/8" H, BTM 52" AFF, 17" clear each side |
+| Mounts | XTM1U + FCAXV1U — 42 3/4" x 24 1/2", centered on each display |
+| Camera | AVer CAM570 — lens CL 46" AFF, centered below the displays |
+| Credenza | 33 1/4" H |
+
+Rev. 1 gives 17" each side and 206" overall, which leaves 1/4" unaccounted for
+across the pair. It is drawn as a gap between the displays so both 17" callouts
+stay exact; the alternative is 17 1/8" margins with the displays touching.
+
+Open items are carried as notes on the sheet: the four Rev. 1 device dimensions
+(80 1/2", 4", 48", 39 3/4") are not yet tied to identified devices, the credenza
+width and setback need confirming, and the wall height needs reconciling against
+the rear wall's measured 8'-10 3/8".
