@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """
-ALLSHORES Executive Meeting Room - Front Wall Dual Display Elevation (Rev. 3).
+ALLSHORES Executive Meeting Room - Front Wall Dual Display Elevation (Rev. 4).
 
-Rev. 3 carries the field measurements: wall height, countertop height, overall
+Rev. 4 adds the credenza-to-mount set-out. Up to Rev. 3 the mount outline was
+placed for label layout rather than at a real height; it is now centered on the
+display, which is what MOUNT_CL dimensions to.
+
+Rev. 3 carried the field measurements: wall height, countertop height, overall
 length, and the four wall device positions. Rev. 1's four dimensions
 (80 1/2", 4", 48", 39 3/4") read as a chain of device centerlines - adding the
 33 3/4" remainder to the right-hand wall closes it exactly on 206".
@@ -31,6 +35,8 @@ ARRAY_W = 2 * DISP_W + DISP_GAP
 D1_CL, D2_CL = D1_L + DISP_W / 2, D2_L + DISP_W / 2
 
 MOUNT_W, MOUNT_H = F(42) + F(3, 4), F(24) + F(1, 2)   # XTM1U + FCAXV1U
+MOUNT_CL = DISP_BTM + DISP_H / 2                      # centered on the display
+MOUNT_BTM, MOUNT_TOP = MOUNT_CL - MOUNT_H / 2, MOUNT_CL + MOUNT_H / 2
 
 CAM_W, CAM_H = F(6) + F(3, 4), F(7) + F(1, 2)         # AVer CAM570
 CAM_LENS_CL = F(46)                                   # per Rev. 1
@@ -67,10 +73,13 @@ for dxx in (d1x, d2x):
     s.box(dxx, dy, dw, dh, width=2.2, fill="#ffffff")
     s.label(dxx + dw / 2, dy + P(30), '98" SAMSUNG', 560, 70)
     s.label(dxx + dw / 2, dy + P(60), '85 7/8" W x 48 7/8" H  |  BTM 52" AFF', 660, 54)
-    mx, my = dxx + (dw - L(MOUNT_W)) / 2, dy + P(88)
+    # the mount is drawn at its real height - centered on the display - because
+    # the sheet now dimensions to it
+    mx, my = dxx + (dw - L(MOUNT_W)) / 2, Y(MOUNT_TOP)
     s.box(mx, my, L(MOUNT_W), L(MOUNT_H), "#4a4a4a", 1.4, "dashed")
     s.label(mx + L(MOUNT_W) / 2, my + P(26), "XTM1U + FCAXV1U", 440, 50)
     s.label(mx + L(MOUNT_W) / 2, my + P(52), '42 3/4" x 24 1/2"', 360, 46)
+    s.seg(mx, Y(MOUNT_CL), mx + L(MOUNT_W), Y(MOUNT_CL), "#9a9a9a", 0.7, "dashed")
 
 # ------------------------------------------------------------------- devices
 TAG = P(22)
@@ -135,6 +144,13 @@ RDIM = X(WALL_W) + P(60)
 s.vdim(0, CRED_H, RDIM, frac(CRED_H), X(WALL_W), side="right")
 s.vdim(CRED_H, DISP_BTM, RDIM, frac(DISP_BTM - CRED_H), X(WALL_W), side="right")
 
+# credenza top to mount centerline - the set-out an installer works from.
+# It runs in the clear band right of display 2, and ties to the mount CL rather
+# than the mount's bottom edge, which sits 11/16" off device D.
+MDIM = X(WALL_W) - P(47)
+s.vdim(CRED_H, MOUNT_CL, MDIM, frac(MOUNT_CL - CRED_H),
+       X(D2_L + (DISP_W + MOUNT_W) / 2))
+
 # ----------------------------------------------------------- device schedule
 BAND = FLOOR + P(200)
 s.schedule(["KEY", "EXISTING WALL DEVICE", "FROM LEFT WALL (CL)", "AFF (CL)"],
@@ -148,18 +164,20 @@ s.notes([
     "NOTES",
     '1.  DISPLAYS SET OUT AS A PAIR - 17" CLEAR EACH SIDE, 1/4" BETWEEN DISPLAYS. BTM 52" AFF.',
     '2.  DISPLAY CENTERLINES 59 15/16" FROM EACH SIDE WALL, 86 1/8" CENTER TO CENTER.',
-    "3.  ALL FOUR DEVICES A-D FALL BEHIND THE DISPLAYS. A AND C ARE 20A DUPLEX RECEPTACLES -",
+    '3.  MOUNT CL 43 3/16" ABOVE THE CREDENZA = 76 7/16" AFF. MOUNT BTM 64 3/16" AFF, TOP 88 11/16" AFF.',
+    "     MOUNT IS SHOWN CENTERED ON THE DISPLAY - VERIFY AGAINST THE DISPLAY VESA PATTERN.",
+    "4.  ALL FOUR DEVICES A-D FALL BEHIND THE DISPLAYS. A AND C ARE 20A DUPLEX RECEPTACLES -",
     "     CONFIRM WHETHER THEY ARE ABANDONED, RELOCATED, OR FED THROUGH THE DISPLAY MOUNTS.",
-    '4.  * DEVICE AFF IS DERIVED, NOT MEASURED FROM THE FLOOR: 31 5/8" ABOVE THE 33 1/4" COUNTER',
-    '     = 64 7/8" AFF. CONFIRM BEFORE ROUGH-IN.',
-    '5.  REV. 1 GIVES 17" EACH SIDE AND 206" OVERALL, LEAVING 1/4" ACROSS THE PAIR. IT IS DRAWN AS',
+    '5.  * DEVICE AFF IS DERIVED, NOT MEASURED FROM THE FLOOR: 31 5/8" ABOVE THE 33 1/4" COUNTER',
+    '     = 64 7/8" AFF, WHICH IS 11/16" OFF THE MOUNT BOTTOM. CONFIRM BEFORE ROUGH-IN.',
+    '6.  REV. 1 GIVES 17" EACH SIDE AND 206" OVERALL, LEAVING 1/4" ACROSS THE PAIR. IT IS DRAWN AS',
     '     THE GAP BETWEEN DISPLAYS; THE ALTERNATIVE IS 17 1/8" MARGINS WITH THE DISPLAYS TOUCHING.',
-    '6.  CREDENZA 33 1/4" TO TOP OF STONE, FULL WALL WIDTH. CONFIRM BASE / TOE DETAIL AND COUNTER',
+    '7.  CREDENZA 33 1/4" TO TOP OF STONE, FULL WALL WIDTH. CONFIRM BASE / TOE DETAIL AND COUNTER',
     "     PROJECTION - THE FIELD PHOTO SHOWS A SETBACK BELOW THE CABINET FACES.",
-    '7.  AVER CAM570 LENS CL 46" AFF PER REV. 1. VERIFY THE LENS OFFSET ON THE FACTORY BRACKET.',
-    '8.  WALL 206" x 106 1/2" FIELD-MEASURED. REAR WALL MEASURED 106 3/8" - CONFIRM THE 1/8".',
-    "9.  ALL DIMENSIONS IN INCHES UNLESS NOTED."],
-    X0 - P(122) + P(760), BAND, P(680), 280)
+    '8.  AVER CAM570 LENS CL 46" AFF PER REV. 1. VERIFY THE LENS OFFSET ON THE FACTORY BRACKET.',
+    '9.  WALL 206" x 106 1/2" FIELD-MEASURED. REAR WALL MEASURED 106 3/8" - CONFIRM THE 1/8".',
+    "10. ALL DIMENSIONS IN INCHES UNLESS NOTED."],
+    X0 - P(122) + P(760), BAND, P(680), 300)
 
 s.title_block(
     "ALLSHORES\nExecutive Meeting Room\nFront Wall\nDual Display Elevation",

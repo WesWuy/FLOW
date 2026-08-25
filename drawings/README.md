@@ -60,7 +60,7 @@ Only one dimension on the sheet is not field-measured:
   52" AFF, since 52 + 42 3/4 display + 7 1/2 camera consumes the 106 3/8" wall.
   More clearance than that requires lowering the display.
 
-## Front wall (Rev. 3)
+## Front wall (Rev. 4)
 
 Redrawn from Rev. 1 onto the rear wall's sheet, then updated with field
 measurements.
@@ -69,7 +69,7 @@ measurements.
 |---|---|
 | Wall | 206" x 106 1/2", field-measured |
 | Displays | (2) 98" Samsung — 85 7/8" W x 48 7/8" H, BTM 52" AFF, 17" clear each side |
-| Mounts | XTM1U + FCAXV1U — 42 3/4" x 24 1/2", centered on each display |
+| Mounts | XTM1U + FCAXV1U — 42 3/4" x 24 1/2", centered on each display; CL 43 3/16" above the credenza = 76 7/16" AFF |
 | Camera | AVer CAM570 — lens CL 46" AFF, centered below the displays |
 | Credenza | 33 1/4" to top of stone, full wall width |
 | Devices | A-D keyed to schedule; Rev. 1's 80 1/2" / 4" / 48" / 39 3/4" chain plus a 33 3/4" remainder closes on 206" |
