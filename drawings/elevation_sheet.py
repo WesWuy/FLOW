@@ -43,11 +43,14 @@ class Sheet:
     K = 1.6                    # canvas blow-up so Lucid's auto-fit type reads small
     S = F(56, 10) * F(8, 5)    # px per inch
 
-    def __init__(self, wall_w, wall_h, y0=132):
-        """y0 is the wall top in pre-scale units; raise it to make room for
-        extra dimension chains above the wall."""
+    def __init__(self, wall_w, wall_h, y0=132, x0=190, scale=None):
+        """y0/x0 place the subject's top-left corner in pre-scale units; raise
+        y0 to make room for extra dimension chains above it. scale overrides
+        px-per-inch for subjects that are not room-sized (a rack, say)."""
         self.wall_w, self.wall_h = F(wall_w), F(wall_h)
-        self.X0, self.Y0 = 190 * self.K, y0 * self.K
+        if scale is not None:
+            self.S = F(scale)
+        self.X0, self.Y0 = x0 * self.K, y0 * self.K
         self.SHEET_W, self.SHEET_H = 1900 * self.K, 1200 * self.K
         self.TB_X = 1540 * self.K
         self.TICK = self.P(6)

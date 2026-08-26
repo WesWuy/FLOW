@@ -2,10 +2,11 @@
 
 Two walls share one sheet format:
 
-| Wall | Generator | Output |
+| Sheet | Generator | Output |
 |---|---|---|
-| Rear (single display) | `build_rear_wall_lucid.py` | `allshores-rear-wall-single-display.lucid.json` |
-| Front (dual display) | `build_front_wall_lucid.py` | `allshores-front-wall-dual-display.lucid.json` |
+| Rear wall (single display) | `build_rear_wall_lucid.py` | `allshores-rear-wall-single-display.lucid.json` |
+| Front wall (dual display) | `build_front_wall_lucid.py` | `allshores-front-wall-dual-display.lucid.json` |
+| AV rack | `build_rack_elevation.py` | `allshores-boardroom-rack.lucid.json` |
 
 `elevation_sheet.py` holds the shared drawing primitives and sheet furniture.
 
@@ -90,3 +91,27 @@ Remaining open items, carried as notes: device B and D types, the credenza base
 and counter projection, whether the 1/4" across the display pair is a gap or
 17 1/8" margins, the CAM570 lens offset, and the 1/8" difference between this
 wall's 106 1/2" and the rear wall's 106 3/8".
+
+## AV rack (Rev. 1)
+
+18U front elevation, drawn to rack units rather than inches — `Sheet` takes a
+`scale` override for subjects that are not room-sized.
+
+**The listed SR-CAB-SLIDE-12U does not hold the equipment list.** This layout
+needs 18U, and that is already after ganging the two AMP-X300 into one RU and
+treating the NVX box endpoints as field devices.
+
+RU heights are manufacturer figures, not estimates:
+
+| | |
+|---|---|
+| Crestron DMF-CI-8 | 2RU, 15.43" deep — holds 2x D30C + 4x E30C, 6 of 8 slots |
+| Crestron AMP-X300 | half-rack 1RU; two gang side by side in a single RU |
+| Shure IntelliMix P300 | half-rack 1RU |
+| Crestron CP4 | 1RU full width |
+| Netgear M4250-16XF | 1RU (43.2 mm) |
+
+Open items carried as notes on the sheet: no copper PoE switch appears on the
+list (the M4250-16XF is all-fibre SFP+), the AM3-212 is listed twice, patch
+panel port count needs confirming, and the USB-SW-400 and AVer HUB30 RU heights
+are unverified — each is allowed a full 1U here.
