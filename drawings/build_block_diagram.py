@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ALLSHORES Executive Boardroom - System Block Diagram (Rev. 1).
+ALLSHORES Executive Boardroom - System Block Diagram (Rev. 2).
 
 Signal flow, organised as four horizontal bands - one per signal domain -
 rather than one tangled graph, so each chain reads left to right:
@@ -48,8 +48,8 @@ am3 = blk(C1, 265, CW, 76, "CRESTRON AM3-212", "AIRMEDIA WIRELESS PRESENT.")
 byod_v = blk(C1, 355, CW, 76, "TABLE BYOD", "HDMI / USB-C")
 enc = blk(C2, 215, CW, 216, "DM-NVX ENCODERS",
           "4x E30C CARD  +  2x E30 BOX", fill="#f4f2ee")
-net = blk(C3, 215, CW, 216, "NETGEAR M4250-16XF  x2",
-          "AV NETWORK  |  SFP+ FIBER", fill="#f4f2ee")
+net = blk(C3, 215, CW, 216, "NETGEAR M4250 SERIES  x2",
+          "AV NETWORK + PoE  |  SKU TBC", fill="#f4f2ee")
 dec = blk(C4, 215, CW, 216, "DM-NVX DECODERS",
           "2x D30C CARD  +  2x D30 BOX", fill="#f4f2ee")
 d98a = blk(C5, 175, CW, 76, 'SAMSUNG 98"  LH98QMCEB', "FRONT WALL  (1 OF 2)")
@@ -82,16 +82,15 @@ s.connect(usbsw, byod_u, **USB)
 
 # =================================================================== 3 - AUDIO
 band(880, 300, "AUDIO")
-mic1 = blk(C1, 935, CW, 76, "SHURE MXA925  (1 OF 2)", "CEILING ARRAY  |  IP AUDIO")
-mic2 = blk(C1, 1025, CW, 76, "SHURE MXA925  (2 OF 2)", "CEILING ARRAY  |  IP AUDIO")
+mics = blk(C1, 980, CW, 120, "SHURE MXA925  x3",
+           "CEILING ARRAYS  |  IP AUDIO")
 p300 = blk(C2, 980, CW, 120, "SHURE INTELLIMIX P300", "DSP  |  AEC  |  USB AUDIO",
            fill="#f4f2ee")
 amps = blk(C3, 980, CW, 120, "CRESTRON AMP-X300  x2", "4-CH POWER AMPLIFIER",
            fill="#f4f2ee")
 spk = blk(C4, 980, CW, 120, "CRESTRON SAROS IC4T  x10", "CEILING SPEAKERS")
 
-for m in (mic1, mic2):
-    s.connect(m, p300, **AUDIO)
+s.connect(mics, p300, **AUDIO)
 s.connect(p300, amps, txt="LINE LEVEL", **AUDIO)
 s.connect(amps, spk, txt="70V / 8 OHM - VERIFY", **AUDIO)
 # far-end audio rides the USB chain back to the codec
@@ -101,14 +100,15 @@ s.connect(p300, usbsw, p1=(0.5, 0), p2=(0.5, 1), txt="USB AUDIO", **USB)
 band(1230, 250, "CONTROL AND NETWORK")
 cp4 = blk(C1, 1290, CW, 110, "CRESTRON CP4", "4-SERIES CONTROL PROCESSOR")
 patch = blk(C2, 1290, CW, 110, "CAT6 PATCH PANEL", "RACK  |  24 PORT")
-poe = blk(C3, 1290, CW, 110, "PoE ACCESS SWITCH", "NOT ON EQUIPMENT LIST",
-          fill="#eceae6", style="dashed")
-panel = blk(C4, 1290, CW, 110, "CRESTRON / LENOVO", "IP TOUCH CONTROLLER")
+netref = blk(C3, 1290, CW, 110, "AV / PoE NETWORK", "SEE VIDEO BAND", fill="#f4f2ee")
+panel = blk(C4, 1290, CW, 110, "LENOVO IP CONTROLLER", "TABLE TOUCH PANEL")
+shades = blk(C5, 1290, CW, 110, "SHADE CONTROL", "NO HARDWARE ON LIST",
+             fill="#eceae6", style="dashed")
 
 s.connect(cp4, patch, **CTRL)
-s.connect(patch, poe, **CTRL)
-s.connect(poe, panel, txt="PoE", **CTRL)
-s.connect(poe, net, p1=(0.5, 0), p2=(0.5, 1), arrow=False, **CTRL)
+s.connect(patch, netref, **CTRL)
+s.connect(netref, panel, txt="PoE", **CTRL)
+s.connect(netref, shades, **CTRL)
 
 # ================================================================== 5 - legend
 LG = 1520
@@ -123,26 +123,34 @@ for i, (name, kw) in enumerate([("VIDEO - AV OVER IP", VIDEO), ("USB", USB),
 
 s.notes([
     "NOTES",
-    "1.  ENDPOINT COUNTS DO NOT BALANCE. 6 NVX ENCODERS (4 CARD + 2 BOX) AND 4 DECODERS",
-    "     (2 CARD + 2 BOX) ARE LISTED FOR 3 SOURCES AND 3 DISPLAYS. CONFIRM THE SOURCE COUNT",
-    "     AND WHICH ENDPOINTS ARE CARDS IN THE DMF-CI-8 VERSUS BOXES IN THE FIELD.",
-    "2.  NO PoE ACCESS SWITCH IS ON THE EQUIPMENT LIST. THE M4250-16XF IS ALL-FIBER SFP+ WITH NO",
-    "     COPPER PORTS, SO IT CANNOT POWER THE MXA925 MICS, CAM570 CAMERAS, NVX ENDPOINTS OR THE",
-    "     TOUCH PANEL. THE BLOCK SHOWN DASHED IS REQUIRED BUT NOT YET SPECIFIED.",
-    "3.  CAMERA PATH IS USB TO THE HUB30, NOT AV OVER IP. THE LENOVO THINKSMART CORE IS THE TEAMS",
+    "1.  NETWORK SWITCH SHOWN AS A PoE-CAPABLE M4250 PER DIRECTION. THE LISTED M4250-16XF IS",
+    "     ALL-FIBER SFP+ WITH NO COPPER PORTS AND CANNOT SERVE THE MICS, CAMERAS, NVX ENDPOINTS",
+    "     OR TOUCH PANEL. CONFIRM THE CORRECTED SKU, PORT COUNT AND PoE BUDGET.",
+    "2.  MICROPHONE QTY CONFLICT: DESIGN NARRATIVE CALLS FOR 3 CEILING MICS, THE EQUIPMENT LIST",
+    "     CARRIES 2x MXA925. DRAWN AS 3 - CONFIRM. TILE DETAIL (4x4) ALSO SHOWN TBC BY OTHERS.",
+    "3.  DISPLAY AND MOUNT CONFLICTS: NARRATIVE SAYS 86\" ON CHIEF LTM1XU FOR ALL THREE; THE LIST",
+    "     CARRIES LH85QMCEB (85\") WITH XTM1U + FCAXV1U x2 AND LTM1U x1. DRAWINGS FOLLOW THE LIST.",
+    "4.  SHADE CONTROL IS A STATED REQUIREMENT. NO SHADE CONTROLLER, MOTORS OR INTERFACE APPEAR",
+    "     ON THE EQUIPMENT LIST - SHOWN DASHED.",
+    "5.  ENDPOINT COUNTS DO NOT BALANCE. 6 NVX ENCODERS AND 4 DECODERS FOR 3 SOURCES AND 3",
+    "     DISPLAYS. CONFIRM SOURCE COUNT AND WHICH ENDPOINTS ARE CARDS VERSUS FIELD BOXES.",
+    "6.  CAMERA PATH IS USB TO THE HUB30, NOT AV OVER IP. THE LENOVO THINKSMART CORE IS THE TEAMS",
     "     HOST; THE LOGITECH ROOMMATE IS EXCLUDED AS IT DOES NOT SUPPORT TWO CAMERAS.",
-    "4.  FAR-END AUDIO RETURNS TO THE CODEC AS USB AUDIO THROUGH THE USB-SW-400, SO THE P300",
+    "7.  FAR-END AUDIO RETURNS TO THE CODEC AS USB AUDIO THROUGH THE USB-SW-400, SO THE P300",
     "     SERVES BOTH THE TEAMS CALL AND ANY BYOM LAPTOP.",
-    "5.  SPEAKER DISTRIBUTION (70V versus LOW-Z) NOT CONFIRMED. 10 SAROS IC4T ON 2 AMP-X300",
+    "8.  SPEAKER DISTRIBUTION (70V versus LOW-Z) NOT CONFIRMED. 10 SAROS IC4T ON 2 AMP-X300",
     "     GIVES 8 CHANNELS - CONFIRM THE TAP / ZONE SCHEME AND CHANNEL ASSIGNMENT.",
-    "6.  SIGNAL FLOW ONLY. NO CABLE TYPES, LENGTHS OR PORT NUMBERS ARE IMPLIED."],
-    1230, LG - 40, 1170, 380)
+    "9.  CRESTRON AM3-212 KIT APPEARS TWICE ON THE LIST. DRAWN AS ONE UNIT.",
+    "10. SECOND FLOOR MEETING ROOM EQUIPMENT EXCLUDED PER DIRECTION. SIGNAL FLOW ONLY - NO",
+    "     CABLE TYPES, LENGTHS OR PORT NUMBERS ARE IMPLIED."],
+    1230, LG - 100, 1170, 440)
 
 s.title_block(
     "ALLSHORES\nExecutive Boardroom\nSystem Block Diagram\nSignal Flow",
-    "SCALE: NTS\nVIDEO: DM NVX AV OVER IP\nAUDIO: SHURE P300 / AMP-X300\n"
+    "SCALE: NTS\nROOM: 18'-6\" W x 42'-0\" L\nVIDEO: DM NVX AV OVER IP\n"
+    "AUDIO: SHURE P300 / AMP-X300\n"
     "USB: AVER HUB30 / USB-SW-400\nCONTROL: CRESTRON CP4",
-    "DATE CREATED: 26/08/24\nCREATED BY: WW\nRev. 1")
+    "DATE CREATED: 26/08/24\nCREATED BY: WW\nRev. 2")
 
 out = "/home/user/FLOW/drawings/allshores-boardroom-block-diagram.lucid.json"
 s.dump(out, "System Block Diagram")

@@ -93,7 +93,7 @@ and counter projection, whether the 1/4" across the display pair is a gap or
 17 1/8" margins, the CAM570 lens offset, and the 1/8" difference between this
 wall's 106 1/2" and the rear wall's 106 3/8".
 
-## AV rack (Rev. 1)
+## AV rack (Rev. 2)
 
 18U front elevation, drawn to rack units rather than inches — `Sheet` takes a
 `scale` override for subjects that are not room-sized.
@@ -112,12 +112,15 @@ RU heights are manufacturer figures, not estimates:
 | Crestron CP4 | 1RU full width |
 | Netgear M4250-16XF | 1RU (43.2 mm) |
 
-Open items carried as notes on the sheet: no copper PoE switch appears on the
-list (the M4250-16XF is all-fibre SFP+), the AM3-212 is listed twice, patch
-panel port count needs confirming, and the USB-SW-400 and AVer HUB30 RU heights
-are unverified — each is allowed a full 1U here.
+The switches are shown as a PoE-capable M4250 per direction — the listed
+M4250-16XF is all-fibre SFP+ with no copper ports. 1U each is assumed, and that
+assumption is what sets the 18U.
 
-## System block diagram (Rev. 1)
+Other open items carried as notes: the AM3-212 is listed twice, patch panel port
+count needs confirming, and the USB-SW-400 and AVer HUB30 RU heights are
+unverified — each is allowed a full 1U here.
+
+## System block diagram (Rev. 2)
 
 Signal flow in four horizontal bands, one per domain, so each chain reads left
 to right instead of as one tangled graph:
@@ -132,14 +135,27 @@ to right instead of as one tangled graph:
 `Sheet.connect()` draws the arrows; it always sets a relative position on both
 endpoints because Standard Import rejects a position on only one.
 
-Two things the drawing exposes rather than hides:
+### Conflicts between the design narrative and the equipment list
 
-* **No PoE access switch is on the equipment list.** The M4250-16XF is all-fibre
-  SFP+ with no copper ports, so nothing listed can power the mics, cameras, NVX
-  endpoints or the touch panel. That block is drawn dashed and labelled as not
-  specified.
-* **Endpoint counts do not balance** — 6 NVX encoders and 4 decoders for 3
-  sources and 3 displays.
+These are stated on the sheet rather than silently resolved:
 
-Also unconfirmed: speaker distribution (70V vs low-Z) and the tap/zone scheme
-for 10 speakers across 8 amplifier channels.
+| Item | Narrative | Equipment list | Drawn as |
+|---|---|---|---|
+| Ceiling mics | 3 | 2x MXA925 | 3 |
+| Rear display | 86" | LH85QMCEB (85") | 85" |
+| Mounts | Chief LTM1XU, all three | XTM1U + FCAXV1U x2, LTM1U x1 | the list |
+| Shade control | required | nothing listed | dashed block |
+
+Also open: NVX endpoint counts do not balance (6 encoders, 4 decoders, 3 sources,
+3 displays); speaker distribution (70V vs low-Z) and the tap/zone scheme for 10
+speakers across 8 amplifier channels; and the AM3-212 appears twice on the list.
+
+### Dimensional conflicts against the field measurements
+
+* **Credenza to ceiling.** Narrative says 72". Field measurement gives
+  106 1/2" ceiling − 33 1/4" counter = **73 1/4"**, a 1 1/4" difference.
+* **Room width.** Narrative says 18.5 ft (222"). The rear wall measured
+  224 1/2" and the front wall 206" — the two display walls are **18 1/2"
+  apart**, which they cannot be in a rectangular room. The 206" is the outlier.
+
+Second floor meeting room equipment is excluded per direction.
