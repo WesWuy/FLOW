@@ -98,6 +98,21 @@ class Sheet:
             ln["text"] = [{"text": txt, "position": 0.5, "side": side}]
         self.lines.append(ln)
 
+    def connect(self, id1, id2, p1=(1, 0.5), p2=(0, 0.5), style="solid",
+                color="#1a1a1a", width=2, arrow=True, txt=None, side="top",
+                line_type="elbow"):
+        """Connector between two shapes, for block diagrams. Relative positions
+        must be given on both endpoints or neither, so both are always set."""
+        ln = {"id": self._id("l"), "lineType": line_type,
+              "endpoint1": {"type": "shapeEndpoint", "style": "none", "shapeId": id1,
+                            "position": {"x": p1[0], "y": p1[1]}},
+              "endpoint2": {"type": "shapeEndpoint", "style": "arrow" if arrow else "none",
+                            "shapeId": id2, "position": {"x": p2[0], "y": p2[1]}},
+              "stroke": {"color": color, "width": width, "style": style}}
+        if txt:
+            ln["text"] = [{"text": txt, "position": 0.5, "side": side}]
+        self.lines.append(ln)
+
     # ------------------------------------------------------------- dimensions
     def hdim(self, i1, i2, y, lab, ext_from=None):
         x1, x2 = self.X(i1), self.X(i2)

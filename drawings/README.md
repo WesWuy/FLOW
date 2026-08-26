@@ -7,6 +7,7 @@ Two walls share one sheet format:
 | Rear wall (single display) | `build_rear_wall_lucid.py` | `allshores-rear-wall-single-display.lucid.json` |
 | Front wall (dual display) | `build_front_wall_lucid.py` | `allshores-front-wall-dual-display.lucid.json` |
 | AV rack | `build_rack_elevation.py` | `allshores-boardroom-rack.lucid.json` |
+| System block diagram | `build_block_diagram.py` | `allshores-boardroom-block-diagram.lucid.json` |
 
 `elevation_sheet.py` holds the shared drawing primitives and sheet furniture.
 
@@ -115,3 +116,30 @@ Open items carried as notes on the sheet: no copper PoE switch appears on the
 list (the M4250-16XF is all-fibre SFP+), the AM3-212 is listed twice, patch
 panel port count needs confirming, and the USB-SW-400 and AVer HUB30 RU heights
 are unverified — each is allowed a full 1U here.
+
+## System block diagram (Rev. 1)
+
+Signal flow in four horizontal bands, one per domain, so each chain reads left
+to right instead of as one tangled graph:
+
+| Band | Chain |
+|---|---|
+| Video | sources → NVX encoders → AV network → NVX decoders → 3 displays |
+| USB | 2x CAM570 → HUB30 → USB-SW-400 → ThinkSmart Core / BYOD |
+| Audio | 2x MXA925 → P300 → 2x AMP-X300 → 10x Saros IC4T |
+| Control | CP4 → patch panel → PoE switch → touch panel |
+
+`Sheet.connect()` draws the arrows; it always sets a relative position on both
+endpoints because Standard Import rejects a position on only one.
+
+Two things the drawing exposes rather than hides:
+
+* **No PoE access switch is on the equipment list.** The M4250-16XF is all-fibre
+  SFP+ with no copper ports, so nothing listed can power the mics, cameras, NVX
+  endpoints or the touch panel. That block is drawn dashed and labelled as not
+  specified.
+* **Endpoint counts do not balance** — 6 NVX encoders and 4 decoders for 3
+  sources and 3 displays.
+
+Also unconfirmed: speaker distribution (70V vs low-Z) and the tap/zone scheme
+for 10 speakers across 8 amplifier channels.
