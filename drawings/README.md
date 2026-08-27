@@ -141,7 +141,7 @@ These are stated on the sheet rather than silently resolved:
 
 | Item | Narrative | Equipment list | Drawn as |
 |---|---|---|---|
-| Ceiling mics | 3 | 2x MXA925 | 3 |
+| Ceiling mics | 3 | 2x MXA925 | **2 — resolved, the list is right** |
 | Rear display | 86" | LH85QMCEB (85") | 85" |
 | Mounts | Chief LTM1XU, all three | XTM1U + FCAXV1U x2, LTM1U x1 | the list |
 | Shade control | required | nothing listed | dashed block |
