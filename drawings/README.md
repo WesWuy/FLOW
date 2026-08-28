@@ -8,6 +8,7 @@ Two walls share one sheet format:
 | Front wall (dual display) | `build_front_wall_lucid.py` | `allshores-front-wall-dual-display.lucid.json` |
 | AV rack | `build_rack_elevation.py` | `allshores-boardroom-rack.lucid.json` |
 | System block diagram | `build_block_diagram.py` | `allshores-boardroom-block-diagram.lucid.json` |
+| Network patch list | `build_patch_list.py` | `allshores-boardroom-patch-list.xlsx` |
 
 `elevation_sheet.py` holds the shared drawing primitives and sheet furniture.
 
@@ -159,3 +160,40 @@ speakers across 8 amplifier channels; and the AM3-212 appears twice on the list.
   apart**, which they cannot be in a rectangular room. The 206" is the outlier.
 
 Second floor meeting room equipment is excluded per direction.
+
+## Network patch list (Rev. 1)
+
+An xlsx rather than a Lucid sheet — it is a working document that gets marked
+up in the field. `build_patch_list.py` holds the data and emits it.
+
+The sheet's organising idea is that **field cable and rack cable are different
+animals**:
+
+| Tab | What it holds | Count |
+|---|---|---|
+| Field Drops | leaves the rack, lands on the patch panel | 14 |
+| Rack Internal | device to switch inside the cabinet, no panel | 19 |
+| Point to Point | USB and HDMI — must never touch a switch | 4 |
+| Port Summary | switch port arithmetic, by formula | — |
+| Assumptions | every open item that moves a cable | 11 |
+
+That split is what sizes the patch panel. **24 ports is correct** — only the 14
+field drops pass through it. The 28 switch ports do not, because rack equipment
+patches straight to the switch.
+
+Switch assignment follows the two-switch recommendation: SW-1 is the in-stock
+GSM4212UX carrying the 7 PoE field devices, SW-2 a 24-port M4250 carrying the
+rack and the non-PoE field drops. 7/10 and 21/26 respectively.
+
+### Found while building it
+
+* **The rear camera needs USB extension.** The rear CAM570 is roughly 42 ft
+  from the rack and USB 3.0 will not go that far passively. No extender appears
+  on the equipment list — the same class of gap as the shade control.
+* **WattBox quantities may be inflated.** 2x WB-800-IPVM-6 and 2x WB-250-IPW-2
+  each consume a switch port. Some may belong to the excluded second floor.
+
+`recalc.py` could not verify the workbook: LibreOffice cannot load any file in
+this container, including a two-line CSV. The Port Summary formulas are plain
+`COUNTIF`/`COUNTIFS` and their results are reproduced independently by the
+verification block at the end of the generator.
