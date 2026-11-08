@@ -1,0 +1,21 @@
+/* FLOW — Shadow, glow, gradient & motion tokens */
+
+:root {
+  --shadow-card: 0 18px 50px rgba(0, 0, 0, 0.55);
+  --shadow-drawer: -20px 0 60px rgba(0, 0, 0, 0.5);
+  --glow-primary: 0 10px 30px rgba(255, 45, 149, 0.35);
+  --glow-primary-hover: 0 14px 38px rgba(255, 45, 149, 0.5);
+
+  --gradient-brand: linear-gradient(92deg, var(--hot), var(--cool), var(--lime));
+  --gradient-hero-text: linear-gradient(92deg, var(--hot), var(--gold), var(--cool));
+  --gradient-btn-primary: linear-gradient(92deg, var(--hot), #ff6a3d);
+  --gradient-active-chip: linear-gradient(92deg, var(--hot), var(--cool));
+
+  --blur-header: 14px;
+  --blur-cart-overlay: 3px;
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --duration-fast: 0.12s; /* @kind other */
+  --duration-base: 0.18s; /* @kind other */
+  --duration-slow: 0.22s; /* @kind other */
+}

@@ -1,0 +1,35 @@
+/* FLOW — Typography tokens
+   Display face: Bebas Neue (headlines, prices, brand mark) — condensed,
+   all-caps energy, festival-poster voice.
+   Body/UI face: Space Grotesk — a grounded geometric sans for everything
+   you actually read. */
+
+:root {
+  --font-display: "Bebas Neue", Impact, sans-serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+
+  /* Weights */
+  --weight-body-regular: 400;
+  --weight-body-medium: 500;
+  --weight-body-bold: 700;
+  --weight-display: 400; /* Bebas Neue only ships one effective weight */
+
+  /* Type scale — from the repo's clamp()-based hero/section sizing */
+  --text-display-hero: clamp(48px, 11vw, 116px);
+  --text-display-section: 40px;
+  --text-display-card-title: 24px;
+  --text-display-pack-price: 34px;
+  --text-body-lede: clamp(15px, 2vw, 19px);
+  --text-body-base: 16px;
+  --text-body-small: 14px;
+  --text-body-xs: 12px;
+  --text-body-tiny: 10px;
+
+  --leading-tight: 1;
+  --leading-body: 1.55;
+
+  --tracking-display: 1px;
+  --tracking-kicker: 4px;
+  --tracking-eyebrow: 3px;
+  --tracking-badge: 1.5px;
+}

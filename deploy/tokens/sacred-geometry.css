@@ -1,0 +1,16 @@
+/* FLOW — Sacred Geometry pattern tokens.
+   Not sourced from the repo (which has only a plain square grid) — this is an
+   intentional visual addition tying the site to the "God's sacred geometry
+   Earth" brand framing. Used sparingly: one triangular-grid background layer
+   + two mandala watermarks (Flower of Life, Metatron's Cube), always faint
+   and always behind content, never as literal iconography or logos. */
+
+:root {
+  --pattern-triangle-grid: linear-gradient(60deg, rgba(244, 194, 13, 0.06) 1px, transparent 1px),
+    linear-gradient(-60deg, rgba(54, 226, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 45, 149, 0.05) 1px, transparent 1px); /* @kind other */
+  --pattern-triangle-grid-size: 50px 86.6px; /* equilateral triangle: 50 * sqrt(3) ≈ 86.6 */
+
+  --mandala-flower-of-life: url("../assets/geometry/flower-of-life.svg"); /* @kind other */
+  --mandala-metatron-cube: url("../assets/geometry/metatron-cube.svg"); /* @kind other */
+}
