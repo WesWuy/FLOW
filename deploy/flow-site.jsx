@@ -134,11 +134,13 @@
                 "A creative universe where color, humor, nostalgia, and possibility collide. FLOW turns a distinct visual language into art you can collect, wear, share, and step inside."
               )
             ),
-            React.createElement("article", { style: { background: "linear-gradient(145deg, rgba(255,45,149,.12), rgba(54,226,255,.08)), var(--surface-card)", border: "1px solid var(--border-hairline)", borderRadius: "var(--radius-lg)", padding: "clamp(24px,4vw,42px)", boxShadow: "var(--shadow-card)" } },
-              React.createElement("p", { style: { color: "var(--gold)", letterSpacing: "3px", textTransform: "uppercase", fontSize: "11px", marginTop: 0 } }, "The artist"),
-              React.createElement("h2", { style: { fontSize: "40px", margin: "0 0 14px" } }, "Meet Anthony"),
-              React.createElement("p", { style: { color: "var(--text-secondary)", fontSize: "16px", lineHeight: 1.75 } },
-                "FLOW is the brainchild of Anthony Daigneault — artist, founder, and builder of the Future Land of Wonder."
+            React.createElement("article", { className: "flow-artist-industrial" },
+              React.createElement("div", { className: "flow-hazard", "aria-hidden": true }),
+              ["tl", "tr", "bl", "br"].map((pos) => React.createElement("span", { key: pos, className: "flow-rivet flow-rivet-" + pos, "aria-hidden": true })),
+              React.createElement("p", { className: "flow-stencil-label" }, "// The artist"),
+              React.createElement("h2", { style: { fontSize: "40px", margin: "0 0 14px", letterSpacing: "2px" } }, "Meet Anthony"),
+              React.createElement("p", { style: { color: "#b9bcc4", fontSize: "16px", lineHeight: 1.75 } },
+                "FLOW is the brainchild of Anthony — artist, founder, and builder of the Future Land of Wonder."
               ),
               React.createElement(Button, { variant: "ghost", as: "a", href: "https://www.artpal.com/handecapp", style: { marginTop: "10px" } }, "Explore original art")
             )
@@ -225,7 +227,7 @@
         React.createElement("img", { src: "assets/brand/flow-wordmark.jpg", alt: "FLOW — The Future Land of Wonder", style: { height: "34px", width: "auto" } }),
         React.createElement("p", { style: { margin: "6px 0", fontSize: "13px" } }, "The Future Land of Wonder · Art · Merch · Experiences"),
         React.createElement("p", { style: { margin: "6px 0", fontSize: "12px" } },
-          "Founded by Anthony Daigneault · ", React.createElement("a", { href: "https://www.artpal.com/handecapp", target: "_blank", rel: "noopener", style: { color: "var(--accent-secondary)" } }, "Art on ArtPal"), " · ", React.createElement("a", { href: "mailto:contact@futurelandofwonder.com", style: { color: "var(--accent-secondary)" } }, "Contact")
+          "Founded by Anthony · ", React.createElement("a", { href: "https://www.artpal.com/handecapp", target: "_blank", rel: "noopener", style: { color: "var(--accent-secondary)" } }, "Art on ArtPal"), " · ", React.createElement("a", { href: "mailto:contact@futurelandofwonder.com", style: { color: "var(--accent-secondary)" } }, "Contact")
         ),
         React.createElement("p", { style: { margin: "6px 0", fontSize: "11px", opacity: 0.7 } }, `© ${new Date().getFullYear()} FLOW. Stickers are parody fan art.`)
       ),

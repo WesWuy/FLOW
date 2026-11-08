@@ -1,7 +1,7 @@
 # FLOW — The Future Land of Wonder
 
 The official FLOW home for original art, collectible merch, and imaginative
-experiences created by artist and founder Anthony Daigneault.
+experiences created by artist and founder Anthony.
 
 ## Current live site
 
