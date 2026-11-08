@@ -13,7 +13,6 @@
     const [filter, setFilter] = React.useState("all");
     const [cart, setCart] = React.useState({});
     const [cartOpen, setCartOpen] = React.useState(false);
-    const [eventOpen, setEventOpen] = React.useState(false);
     const [toast, setToast] = React.useState({ show: false, message: "" });
 
     const showToast = (message) => setToast({ show: true, message });
@@ -98,7 +97,7 @@
         maskImage: "radial-gradient(circle, #000 45%, transparent 72%)", WebkitMaskImage: "radial-gradient(circle, #000 45%, transparent 72%)",
       } }),
 
-      React.createElement(Header, { cartCount, onCartClick: () => setCartOpen(true), links: ["About", "Merch", "Events", "Contact"], logoSrc: "assets/brand/flow-wordmark.jpg" }),
+      React.createElement(Header, { cartCount, onCartClick: () => setCartOpen(true), links: ["About", "Merch", "Contact"], logoSrc: "assets/brand/flow-wordmark.jpg" }),
 
       React.createElement("main", { id: "main-content" },
         React.createElement("section", { "data-screen-label": "FLOW Site — Hero", style: { position: "relative", padding: "clamp(64px,10vw,126px) clamp(16px,4vw,48px) 64px", maxWidth: 1100, margin: "0 auto", textAlign: "center", overflow: "hidden" } },
@@ -171,29 +170,6 @@
             React.createElement(PackCard, { title: "Starter 3-Pack", price: "$11.99", note: "Any three single drops. Add your choices to the PayPal note.", ctaLabel: "Add 3-Pack", onAdd: () => addPack("starter-3-pack") }),
             React.createElement(PackCard, { title: "The Full Vault", price: "$29.99", note: "One sticker in every FLOW design.", badge: "Best value", featured: true, ctaLabel: "Add the Vault", onAdd: () => addPack("full-vault") }),
             React.createElement(PackCard, { title: "Holo Duo", price: "$12.99", note: "Any two designs on rainbow holographic vinyl. Add your choices to the PayPal note.", ctaLabel: "Add Holo Duo", onAdd: () => addPack("holo-duo") })
-          )
-        ),
-
-        React.createElement("section", { id: "events", "data-screen-label": "FLOW Site — Events", style: { position: "relative", maxWidth: "var(--container-narrow)", margin: "0 auto", padding: "30px clamp(16px,4vw,48px) 70px" } },
-          React.createElement("img", { "aria-hidden": true, src: "assets/geometry/metatron-cube.svg", className: "flow-mandala-spin-slow", style: {
-            position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "min(520px, 120%)", height: "min(520px, 120%)", opacity: 0.08, zIndex: 0, pointerEvents: "none",
-          } }),
-          React.createElement("div", { style: { position: "relative", zIndex: 1, background: "var(--surface-card)", border: "1px solid var(--border-hairline)", borderRadius: "var(--radius-lg)", boxShadow: "var(--shadow-card)", padding: "clamp(28px,5vw,48px)", textAlign: "center" } },
-            React.createElement("p", { style: { color: "var(--accent-secondary)", letterSpacing: "3px", textTransform: "uppercase", fontSize: "11px", margin: "0 0 10px" } }, "FLOW events"),
-            React.createElement("h2", { style: { fontSize: "42px", margin: "0 0 12px" } }, "Rave in The Cave"),
-            React.createElement("p", { style: { color: "var(--text-secondary)", fontSize: "16px", lineHeight: 1.7, maxWidth: 560, margin: "0 auto 22px" } },
-              "A FLOW experience currently in development. Public details will be shared only after everything is confirmed."
-            ),
-            React.createElement("button", {
-              type: "button",
-              "aria-expanded": eventOpen,
-              "aria-controls": "event-status",
-              onClick: () => setEventOpen((open) => !open),
-              style: { fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "15px", padding: "13px 24px", borderRadius: "var(--radius-pill)", cursor: "pointer", border: "1px solid var(--border-hairline)", background: "transparent", color: "var(--text-primary)" },
-            }, eventOpen ? "Hide event status" : "View event status"),
-            eventOpen && React.createElement("p", { id: "event-status", style: { color: "var(--text-secondary)", fontSize: "14px", lineHeight: 1.7, margin: "22px auto 0", maxWidth: 520 } },
-              "Planning is underway. Date, venue, lineup, and ticket information are not yet public."
-            )
           )
         ),
 
